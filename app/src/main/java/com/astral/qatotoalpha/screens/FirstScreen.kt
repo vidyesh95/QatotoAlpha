@@ -1,11 +1,8 @@
-package com.astral.qatotoalpha
+package com.astral.qatotoalpha.screens
 
 import android.content.Context
 import android.content.res.Configuration
-import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -30,41 +28,36 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavController
+import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.ui.theme.Typography
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        installSplashScreen()
-        setContent {
-            val sharedPref = getSharedPreferences(
-                "myPref", Context.MODE_PRIVATE
-            )
-            val isContinueAcceptedFromSharedPref =
-                sharedPref.getBoolean("isContinueAccepted", false)
-            //FirstPage()
-            Navigation(isContinueAccepted = isContinueAcceptedFromSharedPref)
-        }
-    }
+@Composable
+fun FirstScreen(navController: NavController) {
+    FirstPage(navController = navController)
 }
 
 @Composable
-fun FirstPage() {
+fun FirstPage(navController: NavController) {
     QatotoAlphaTheme {
         // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            TermsPageContainer()
+            TermsPageContainer(navController = navController)
         }
     }
 }
 
 @Composable
-fun TermsPageContainer() {
+fun TermsPageContainer(navController: NavController) {
+    val context = LocalContext.current
+    val sharedPref = context.getSharedPreferences(
+        "myPref", Context.MODE_PRIVATE
+    )
+    val editor = sharedPref.edit()
     Column(
         modifier = Modifier
             .wrapContentSize(),
@@ -79,7 +72,13 @@ fun TermsPageContainer() {
                 .width(width = 226.dp)
                 .wrapContentHeight()
                 .padding(top = 16.dp),
-            onClick = { /* TODO */ }
+            onClick = {
+                editor.apply {
+                    putBoolean("isContinueAccepted", true)
+                    apply()
+                }
+                navController.navigate(Screen.HomeScreen.route)
+            }
         )
     }
 }
@@ -197,6 +196,6 @@ fun AnnotatedClickableText() {
     device = "id:pixel_c"
 )
 @Composable
-fun ContinueTextPreview() {
-    FirstPage()
+fun FirstScreenPreview() {
+    //FirstPage()
 }
