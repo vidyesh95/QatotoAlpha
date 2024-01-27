@@ -77,7 +77,12 @@ fun TermsPageContainer(navController: NavController) {
                     putBoolean("isContinueAccepted", true)
                     apply()
                 }
-                navController.navigate(Screen.HomeScreen.route)
+                navController.navigate(Screen.MainScreen.route) {
+                    // Clears all previous destinations up to (and optionally including) the specified destination
+                    popUpTo(Screen.FirstScreen.route) {
+                        inclusive = true
+                    }
+                }
             }
         )
     }

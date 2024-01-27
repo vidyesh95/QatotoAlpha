@@ -15,12 +15,12 @@ import androidx.navigation.NavController
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 
 @Composable
-fun HomeScreen(navController: NavController) {
-    HomePage(navController = navController)
+fun MainScreen(navController: NavController) {
+    MainPage(navController = navController)
 }
 
 @Composable
-fun HomePage(navController: NavController) {
+fun MainPage(navController: NavController) {
     QatotoAlphaTheme {
         // A surface container using the 'background' color from the theme
         Surface(
@@ -32,7 +32,7 @@ fun HomePage(navController: NavController) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "Home Screen")
+                Text(text = "Main Screen")
             }
         }
     }
@@ -53,6 +53,6 @@ fun HomePage(navController: NavController) {
     device = "id:pixel_c"
 )
 @Composable
-fun HomeScreenPreview() {
-    //HomePage()
+fun MainScreenPreview() {
+    //MainPage()
 }
