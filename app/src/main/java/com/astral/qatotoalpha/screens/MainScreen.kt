@@ -1,58 +1,122 @@
 package com.astral.qatotoalpha.screens
 
-import android.content.res.Configuration
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
+import com.astral.qatotoalpha.util.NavigationBarScreen
 
 @Composable
-fun MainScreen(navController: NavController) {
-    MainPage(navController = navController)
+fun MainScreen() {
+    MainPage()
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainPage(navController: NavController) {
+fun MainPage() {
     QatotoAlphaTheme {
         // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "Main Screen")
+            val items = listOf(
+                NavigationBarScreen.HomeScreen,
+                NavigationBarScreen.AnimeScreen,
+                NavigationBarScreen.CreateScreen,
+                NavigationBarScreen.StoreScreen,
+                NavigationBarScreen.ShortsScreen
+            )
+            val navController = rememberNavController()
+            Scaffold(
+                bottomBar = {
+                    NavigationBar {
+                        val navBackStackEntry by navController.currentBackStackEntryAsState()
+                        val currentDestination = navBackStackEntry?.destination
+                        items.forEach { screen ->
+                            val selected = currentDestination?.hierarchy?.any {
+                                it.route == screen.route
+                            } == true
+                            NavigationBarItem(
+                                icon = {
+                                    BadgedBox(
+                                        badge = {
+                                            if (screen.badgeCount != null && screen.badgeCount > 0) {
+                                                Badge {
+                                                    Text(text = screen.badgeCount.toString())
+                                                }
+                                            }
+                                        }
+                                    ) {
+                                        Icon(
+                                            imageVector = if (selected) screen.selectedIcon else screen.unselectedIcon,
+                                            contentDescription = screen.title
+                                        )
+                                    }
+                                },
+                                label = { Text(screen.title) },
+                                selected = selected,
+                                onClick = {
+                                    navController.navigate(screen.route) {
+                                        // Pop up to the start destination of the graph to avoid
+                                        // building up a large stack of destinations on the back stack
+                                        // as users select items
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        // Avoid multiple copies of the same destination when
+                                        // reselecting the same item
+                                        launchSingleTop = true
+                                        // Restore state when reselecting a previously selected item
+                                        restoreState = true
+                                    }
+                                }
+                            )
+                        }
+                    }
+                }
+            ) { innerPadding ->
+                NavHost(
+                    navController = navController,
+                    startDestination = NavigationBarScreen.HomeScreen.route,
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    composable(route = NavigationBarScreen.HomeScreen.route) {
+                        HomeScreen()
+                    }
+                    composable(route = NavigationBarScreen.AnimeScreen.route) {
+                        AnimeScreen()
+                    }
+                    composable(route = NavigationBarScreen.CreateScreen.route) {
+                        CreateScreen()
+                    }
+                    composable(route = NavigationBarScreen.StoreScreen.route) {
+                        StoreScreen()
+                    }
+                    composable(route = NavigationBarScreen.ShortsScreen.route) {
+                        ShortsScreen()
+                    }
+                }
             }
         }
     }
 }
 
-@Preview(
-    showBackground = true, name = "Day mode",
-    uiMode = Configuration.UI_MODE_NIGHT_NO or Configuration.UI_MODE_TYPE_NORMAL
-)
-@Preview(
-    showBackground = true, name = "Night mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
-)
-@Preview(
-    name = "Day mode - Tablet",
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_NO or Configuration.UI_MODE_TYPE_NORMAL,
-    device = "id:pixel_c"
-)
-@Composable
-fun MainScreenPreview() {
-    //MainPage()
-}

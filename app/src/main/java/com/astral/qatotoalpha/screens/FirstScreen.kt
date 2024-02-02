@@ -32,6 +32,7 @@ import androidx.navigation.NavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.ui.theme.Typography
+import com.astral.qatotoalpha.util.Screen
 
 @Composable
 fun FirstScreen(navController: NavController) {
