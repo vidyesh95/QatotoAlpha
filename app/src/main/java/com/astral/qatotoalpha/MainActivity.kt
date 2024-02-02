@@ -10,8 +10,8 @@ import com.astral.qatotoalpha.graphs.RootNavigationGraph
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         installSplashScreen()
+        super.onCreate(savedInstanceState)
         setContent {
             val sharedPref = getSharedPreferences(
                 "myPref", Context.MODE_PRIVATE
