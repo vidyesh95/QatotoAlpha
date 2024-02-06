@@ -8,21 +8,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.astral.qatotoalpha.R
 
-/*
-val RobotoFontFamily = FontFamily(
+// Set of Material typography styles to start with
+/*val RobotoFontFamily = FontFamily(
     listOf(
         Font(R.font.roboto_regular),
-        Font(R.font.roboto_medium,FontWeight.Medium)
+        Font(R.font.roboto_medium, FontWeight.Medium)
     )
-)
+)*/
 
 val RobotoSerifFontFamily = FontFamily(
     listOf(
         Font(R.font.robotoserif_regular),
-        Font(R.font.robotoserif_medium,FontWeight.Medium)
+        Font(R.font.robotoserif_medium, FontWeight.Medium)
     )
 )
-*/
 
 // Set of Material typography styles to start with
 val Typography = Typography(
