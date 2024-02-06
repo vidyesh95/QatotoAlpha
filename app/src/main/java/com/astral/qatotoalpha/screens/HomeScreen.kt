@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.NotificationsNone
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.NotificationsNone
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -61,19 +61,19 @@ fun HomePage() {
                         actions = {
                             IconButton(onClick = { /*TODO*/ }) {
                                 Icon(
-                                    imageVector = Icons.Default.NotificationsNone,
+                                    imageVector = Icons.Outlined.NotificationsNone,
                                     contentDescription = "No Notifications"
                                 )
                             }
                             IconButton(onClick = { /*TODO*/ }) {
                                 Icon(
-                                    imageVector = Icons.Default.Search,
+                                    imageVector = Icons.Outlined.Search,
                                     contentDescription = "Search"
                                 )
                             }
                             IconButton(onClick = { /*TODO*/ }) {
                                 Icon(
-                                    imageVector = Icons.Default.AccountCircle,
+                                    imageVector = Icons.Outlined.AccountCircle,
                                     contentDescription = "Account"
                                 )
                             }
