@@ -2,8 +2,10 @@ package com.astral.qatotoalpha.screens
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -15,9 +17,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.AccountCircle
@@ -34,8 +39,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -130,6 +137,291 @@ fun ScrollContent(innerPadding: PaddingValues) {
         }
     }*/
     VideoContainer(innerPadding = innerPadding)
+    //ShortsContainer(innerPadding = innerPadding)
+}
+
+@Composable
+fun ShortsContainer(innerPadding: PaddingValues) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(innerPadding)
+            .verticalScroll(rememberScrollState())
+    ) {
+        Text(
+            text = "Shorts",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
+        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .aspectRatio(9f / 16f)
+                        .clip(shape = MaterialTheme.shapes.small),
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        painter = painterResource(id = R.drawable.shorts_thumbnail_1),
+                        contentDescription = "Shorts Thumbnail",
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = Color.Black.copy(alpha = 0.25f))
+                    )
+
+                    Icon(
+                        modifier = Modifier
+                            .align(alignment = Alignment.TopEnd)
+                            .padding(top = 6.dp)
+                            .size(24.dp),
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = "More Options",
+                        tint = Color.White,
+                    )
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(alignment = Alignment.BottomStart)
+                            .padding(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "Recomposition Explained in Simple Terms (Jetpack Compose)",
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodySmall,
+                            softWrap = true,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                text = "7.2K",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                            Text(
+                                text = "views",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                        }
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .aspectRatio(9f / 16f)
+                        .clip(shape = MaterialTheme.shapes.small),
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        painter = painterResource(id = R.drawable.shorts_thumbnail_2),
+                        contentDescription = "Shorts Thumbnail",
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = Color.Black.copy(alpha = 0.25f))
+                    )
+
+                    Icon(
+                        modifier = Modifier
+                            .align(alignment = Alignment.TopEnd)
+                            .padding(top = 6.dp)
+                            .size(24.dp),
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = "More Options",
+                        tint = Color.White,
+                    )
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(alignment = Alignment.BottomStart)
+                            .padding(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "Recomposition Explained in Simple Terms (Jetpack Compose)",
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodySmall,
+                            softWrap = true,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                text = "7.2K",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                            Text(
+                                text = "views",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                        }
+                    }
+                }
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .aspectRatio(9f / 16f)
+                        .clip(shape = MaterialTheme.shapes.small),
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        painter = painterResource(id = R.drawable.shorts_thumbnail_3),
+                        contentDescription = "Shorts Thumbnail",
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = Color.Black.copy(alpha = 0.25f))
+                    )
+
+                    Icon(
+                        modifier = Modifier
+                            .align(alignment = Alignment.TopEnd)
+                            .padding(top = 6.dp)
+                            .size(24.dp),
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = "More Options",
+                        tint = Color.White,
+                    )
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(alignment = Alignment.BottomStart)
+                            .padding(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "Recomposition Explained in Simple Terms (Jetpack Compose)",
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodySmall,
+                            softWrap = true,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                text = "9K",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                            Text(
+                                text = "watching",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                        }
+                    }
+                }
+
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .aspectRatio(9f / 16f)
+                        .clip(shape = MaterialTheme.shapes.small),
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        painter = painterResource(id = R.drawable.shorts_thumbnail_4),
+                        contentDescription = "Shorts Thumbnail",
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = Color.Black.copy(alpha = 0.25f))
+                    )
+
+                    Icon(
+                        modifier = Modifier
+                            .align(alignment = Alignment.TopEnd)
+                            .padding(top = 6.dp)
+                            .size(24.dp),
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = "More Options",
+                        tint = Color.White,
+                    )
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(alignment = Alignment.BottomStart)
+                            .padding(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "Recomposition Explained in Simple Terms (Jetpack Compose)",
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodySmall,
+                            softWrap = true,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                text = "1.3K",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                            Text(
+                                text = "watching",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Composable
