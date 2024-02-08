@@ -20,9 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.AccountCircle
@@ -121,8 +119,8 @@ fun ScrollContent(innerPadding: PaddingValues) {
         R.drawable.video_thumbnail_2,
         R.drawable.video_thumbnail_3,
         R.drawable.video_thumbnail_4,
-    )*/
-    /*LazyColumn(
+    )
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding),
@@ -136,18 +134,16 @@ fun ScrollContent(innerPadding: PaddingValues) {
             )
         }
     }*/
-    VideoContainer(innerPadding = innerPadding)
-    //ShortsContainer(innerPadding = innerPadding)
+    VideoContainer()
+    //ShortsContainer()
 }
 
 @Composable
-fun ShortsContainer(innerPadding: PaddingValues) {
+fun ShortsContainer() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(innerPadding)
-            .verticalScroll(rememberScrollState())
     ) {
         Text(
             text = "Shorts",
@@ -425,12 +421,11 @@ fun ShortsContainer(innerPadding: PaddingValues) {
 }
 
 @Composable
-fun VideoContainer(innerPadding: PaddingValues) {
+fun VideoContainer() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(innerPadding)
     ) {
         Image(
             modifier = Modifier
@@ -463,7 +458,7 @@ fun VideoDetails() {
                     shape = CircleShape
                 )
                 .clip(shape = CircleShape),
-            painter = painterResource(id = R.drawable.profile_image_01),
+            painter = painterResource(id = R.drawable.profile_image_1),
             contentDescription = "Video Thumbnail",
             contentScale = ContentScale.Crop
         )
