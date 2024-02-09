@@ -1,10 +1,12 @@
 package com.astral.qatotoalpha.util.model
 
+import androidx.annotation.DrawableRes
+
 data class VideoModel(
     val videoId: String,
-    val videoThumbnail: String,
     val isLive: Boolean = false,
-    val profileImage: String,
+    @DrawableRes val videoThumbnail: Int,
+    @DrawableRes val profileImage: Int,
     val videoTitle: String,
     val videoChannel: String,
     val videoViews: String,

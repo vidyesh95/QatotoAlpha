@@ -50,6 +50,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
+import com.astral.qatotoalpha.util.repository.ShortsRepository
+import com.astral.qatotoalpha.util.repository.VideoRepository
 
 @Composable
 fun HomeScreen() {
@@ -114,12 +116,13 @@ fun HomePage() {
 
 @Composable
 fun ScrollContent(innerPadding: PaddingValues) {
-    /*val resourceIds = listOf(
-        R.drawable.video_thumbnail_1,
-        R.drawable.video_thumbnail_2,
-        R.drawable.video_thumbnail_3,
-        R.drawable.video_thumbnail_4,
-    )
+    val videoRepository = VideoRepository()
+    val videoData = videoRepository.getAllData()
+
+    val shortsRepository = ShortsRepository()
+    val shortsData = shortsRepository.getAllData()
+
+    /*
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()

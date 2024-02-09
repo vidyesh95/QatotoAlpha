@@ -1,14 +1,16 @@
 package com.astral.qatotoalpha.util.model
 
+import androidx.annotation.DrawableRes
+
 data class ShortsModel(
-    val videoId: String,
-    val videoThumbnail: String,
+    val shortsId: String,
     val isLive: Boolean = false,
-    val profileImage: String,
-    val videoTitle: String,
-    val videoChannel: String,
-    val videoViews: String,
-    val videoDuration: String = "0 seconds",
-    val videoLength: String,
-    val videoUrl: String
+    @DrawableRes val shortsThumbnail: Int,
+    @DrawableRes val profileImage: Int,
+    val shortsTitle: String,
+    val shortsChannel: String,
+    val shortsViews: String,
+    val shortsDuration: String = "0 seconds",
+    val shortsLength: String,
+    val shortsUrl: String
 )
