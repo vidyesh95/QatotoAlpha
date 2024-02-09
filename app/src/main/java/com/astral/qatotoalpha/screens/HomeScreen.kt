@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -48,8 +49,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
+import com.astral.qatotoalpha.util.model.ShortsModel
+import com.astral.qatotoalpha.util.model.VideoModel
 import com.astral.qatotoalpha.util.repository.ShortsRepository
 import com.astral.qatotoalpha.util.repository.VideoRepository
 
@@ -122,7 +124,6 @@ fun ScrollContent(innerPadding: PaddingValues) {
     val shortsRepository = ShortsRepository()
     val shortsData = shortsRepository.getAllData()
 
-    /*
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -136,13 +137,13 @@ fun ScrollContent(innerPadding: PaddingValues) {
                 modifier = Modifier.padding(16.dp)
             )
         }
-    }*/
-    VideoContainer()
+    }
+    //VideoContainer()
     //ShortsContainer()
 }
 
 @Composable
-fun ShortsContainer() {
+fun ShortsContainer(shortsModel: ShortsModel) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -175,7 +176,7 @@ fun ShortsContainer() {
                     Image(
                         modifier = Modifier
                             .fillMaxSize(),
-                        painter = painterResource(id = R.drawable.shorts_thumbnail_1),
+                        painter = painterResource(id = shortsModel.shortsThumbnail),
                         contentDescription = "Shorts Thumbnail",
                         contentScale = ContentScale.Crop
                     )
@@ -204,7 +205,7 @@ fun ShortsContainer() {
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
-                            text = "Recomposition Explained in Simple Terms (Jetpack Compose)",
+                            text = shortsModel.shortsTitle,
                             color = Color.White,
                             style = MaterialTheme.typography.bodySmall,
                             softWrap = true,
@@ -215,7 +216,7 @@ fun ShortsContainer() {
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             Text(
-                                text = "7.2K",
+                                text = shortsModel.shortsViews,
                                 color = Color.White,
                                 style = MaterialTheme.typography.bodySmall,
                             )
@@ -236,7 +237,7 @@ fun ShortsContainer() {
                     Image(
                         modifier = Modifier
                             .fillMaxSize(),
-                        painter = painterResource(id = R.drawable.shorts_thumbnail_2),
+                        painter = painterResource(id = shortsModel.shortsThumbnail),
                         contentDescription = "Shorts Thumbnail",
                         contentScale = ContentScale.Crop
                     )
@@ -265,7 +266,7 @@ fun ShortsContainer() {
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
-                            text = "Recomposition Explained in Simple Terms (Jetpack Compose)",
+                            text = shortsModel.shortsTitle,
                             color = Color.White,
                             style = MaterialTheme.typography.bodySmall,
                             softWrap = true,
@@ -276,7 +277,7 @@ fun ShortsContainer() {
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             Text(
-                                text = "7.2K",
+                                text = shortsModel.shortsViews,
                                 color = Color.White,
                                 style = MaterialTheme.typography.bodySmall,
                             )
@@ -304,7 +305,7 @@ fun ShortsContainer() {
                     Image(
                         modifier = Modifier
                             .fillMaxSize(),
-                        painter = painterResource(id = R.drawable.shorts_thumbnail_3),
+                        painter = painterResource(id = shortsModel.shortsThumbnail),
                         contentDescription = "Shorts Thumbnail",
                         contentScale = ContentScale.Crop
                     )
@@ -333,7 +334,7 @@ fun ShortsContainer() {
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
-                            text = "Recomposition Explained in Simple Terms (Jetpack Compose)",
+                            text = shortsModel.shortsTitle,
                             color = Color.White,
                             style = MaterialTheme.typography.bodySmall,
                             softWrap = true,
@@ -344,12 +345,12 @@ fun ShortsContainer() {
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             Text(
-                                text = "9K",
+                                text = shortsModel.shortsViews,
                                 color = Color.White,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             Text(
-                                text = "watching",
+                                text = "views",
                                 color = Color.White,
                                 style = MaterialTheme.typography.bodySmall,
                             )
@@ -366,7 +367,7 @@ fun ShortsContainer() {
                     Image(
                         modifier = Modifier
                             .fillMaxSize(),
-                        painter = painterResource(id = R.drawable.shorts_thumbnail_4),
+                        painter = painterResource(id = shortsModel.shortsThumbnail),
                         contentDescription = "Shorts Thumbnail",
                         contentScale = ContentScale.Crop
                     )
@@ -395,7 +396,7 @@ fun ShortsContainer() {
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
-                            text = "Recomposition Explained in Simple Terms (Jetpack Compose)",
+                            text = shortsModel.shortsTitle,
                             color = Color.White,
                             style = MaterialTheme.typography.bodySmall,
                             softWrap = true,
@@ -406,12 +407,12 @@ fun ShortsContainer() {
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             Text(
-                                text = "1.3K",
+                                text = shortsModel.shortsViews,
                                 color = Color.White,
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             Text(
-                                text = "watching",
+                                text = "views",
                                 color = Color.White,
                                 style = MaterialTheme.typography.bodySmall,
                             )
@@ -423,8 +424,9 @@ fun ShortsContainer() {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun VideoContainer() {
+fun VideoContainer(videoModel: VideoModel) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -434,127 +436,121 @@ fun VideoContainer() {
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(16f / 9f),
-            painter = painterResource(id = R.drawable.video_thumbnail_1),
+            painter = painterResource(id = videoModel.videoThumbnail),
             contentDescription = "Video Thumbnail"
         )
-        VideoDetails()
-        Divider(modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp))
-    }
-}
-
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-fun VideoDetails() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-    ) {
-        Image(
-            modifier = Modifier
-                .padding(16.dp)
-                .width(36.dp)
-                .aspectRatio(ratio = 1f / 1f)
-                .border(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    shape = CircleShape
-                )
-                .clip(shape = CircleShape),
-            painter = painterResource(id = R.drawable.profile_image_1),
-            contentDescription = "Video Thumbnail",
-            contentScale = ContentScale.Crop
-        )
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .weight(1f)
-                .padding(top = 12.dp),
         ) {
-            Text(
+            Image(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                text = "Pomporo singing \uD83C\uDF3CFengzhi Senai\uD83C\uDF3C at Disney Land",
-                style = MaterialTheme.typography.labelLarge,
-                maxLines = 2,
-                softWrap = true,
-                overflow = TextOverflow.Ellipsis,
+                    .padding(16.dp)
+                    .width(36.dp)
+                    .aspectRatio(ratio = 1f / 1f)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        shape = CircleShape
+                    )
+                    .clip(shape = CircleShape),
+                painter = painterResource(id = videoModel.profileImage),
+                contentDescription = "Video Thumbnail",
+                contentScale = ContentScale.Crop
             )
-            FlowRow(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight(),
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    .wrapContentHeight()
+                    .weight(1f)
+                    .padding(top = 12.dp),
             ) {
                 Text(
-                    text = "Arin Light",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.outline,
-                    maxLines = 1,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    text = videoModel.videoTitle,
+                    style = MaterialTheme.typography.labelLarge,
+                    maxLines = 2,
                     softWrap = true,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
-                Text(
-                    text = "•",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.outline,
-                    maxLines = 1,
-                    softWrap = true,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = "2.5M",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.outline,
-                    maxLines = 1,
-                    softWrap = true,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = "views",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.outline,
-                    maxLines = 1,
-                    softWrap = true,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = "•",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.outline,
-                    maxLines = 1,
-                    softWrap = true,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = "12 hours",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.outline,
-                    maxLines = 1,
-                    softWrap = true,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = "ago",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.outline,
-                    maxLines = 1,
-                    softWrap = true,
-                    overflow = TextOverflow.Ellipsis
-                )
+                FlowRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = videoModel.channelName,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = "•",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = videoModel.videoViews,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = "views",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = "•",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = videoModel.videoDuration,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = "ago",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
+            Icon(
+                modifier = Modifier
+                    .padding(end = 14.dp, top = 14.dp)
+                    .width(14.dp)
+                    .height(14.dp),
+                imageVector = Icons.Default.MoreVert,
+                contentDescription = "More Options",
+                tint = MaterialTheme.colorScheme.onBackground
+            )
         }
-        Icon(
-            modifier = Modifier
-                .padding(end = 14.dp, top = 14.dp)
-                .width(14.dp)
-                .height(14.dp),
-            imageVector = Icons.Default.MoreVert,
-            contentDescription = "More Options",
-            tint = MaterialTheme.colorScheme.onBackground
-        )
+        Divider(modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp))
     }
 }
 
