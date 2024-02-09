@@ -21,6 +21,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -130,295 +133,185 @@ fun ScrollContent(innerPadding: PaddingValues) {
             .padding(innerPadding),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(50) { item ->
-            Text(
-                text = "Item $item",
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(16.dp)
-            )
+        itemsIndexed(
+            items = videoData,
+            key = { index, item ->
+                item.videoId
+            }
+        ) { index, item ->
+            if (index == 1) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                ) {
+                    Text(
+                        text = "Shorts",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(
+                            start = 16.dp,
+                            top = 0.dp,
+                            end = 16.dp,
+                            bottom = 8.dp
+                        )
+                    )
+                    LazyRow(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight(),
+                        contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(
+                            items = shortsData,
+                            key = {
+                                it.shortsId
+                            }
+                        ) { item ->
+                            if (item.isLive) {
+                                ShortsContainerLive(shortsModel = item)
+                            } else {
+                                ShortsContainer(shortsModel = item)
+                            }
+                        }
+                    }
+                    Divider(modifier = Modifier.padding(all = 16.dp))
+                }
+            }
+            if (item.isLive) {
+                VideoContainerLive(videoModel = item)
+            } else {
+                VideoContainer(videoModel = item)
+            }
         }
     }
-    //VideoContainer()
-    //ShortsContainer()
 }
 
 @Composable
 fun ShortsContainer(shortsModel: ShortsModel) {
-    Column(
+    Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
+            .width(160.dp)
+            .aspectRatio(9f / 16f)
+            .clip(shape = MaterialTheme.shapes.small),
     ) {
-        Text(
-            text = "Shorts",
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
+        Image(
+            modifier = Modifier
+                .fillMaxSize(),
+            painter = painterResource(id = shortsModel.shortsThumbnail),
+            contentDescription = "Shorts Thumbnail",
+            contentScale = ContentScale.Crop
         )
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color.Black.copy(alpha = 0.25f))
+        )
+
+        Icon(
+            modifier = Modifier
+                .align(alignment = Alignment.TopEnd)
+                .padding(top = 6.dp)
+                .size(24.dp),
+            imageVector = Icons.Default.MoreVert,
+            contentDescription = "More Options",
+            tint = Color.White,
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+                .align(alignment = Alignment.BottomStart)
+                .padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
+            Text(
+                text = shortsModel.shortsTitle,
+                color = Color.White,
+                style = MaterialTheme.typography.bodySmall,
+                softWrap = true,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .aspectRatio(9f / 16f)
-                        .clip(shape = MaterialTheme.shapes.small),
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        painter = painterResource(id = shortsModel.shortsThumbnail),
-                        contentDescription = "Shorts Thumbnail",
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(color = Color.Black.copy(alpha = 0.25f))
-                    )
-
-                    Icon(
-                        modifier = Modifier
-                            .align(alignment = Alignment.TopEnd)
-                            .padding(top = 6.dp)
-                            .size(24.dp),
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "More Options",
-                        tint = Color.White,
-                    )
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(alignment = Alignment.BottomStart)
-                            .padding(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text(
-                            text = shortsModel.shortsTitle,
-                            color = Color.White,
-                            style = MaterialTheme.typography.bodySmall,
-                            softWrap = true,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Text(
-                                text = shortsModel.shortsViews,
-                                color = Color.White,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                            Text(
-                                text = "views",
-                                color = Color.White,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                        }
-                    }
-                }
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .aspectRatio(9f / 16f)
-                        .clip(shape = MaterialTheme.shapes.small),
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        painter = painterResource(id = shortsModel.shortsThumbnail),
-                        contentDescription = "Shorts Thumbnail",
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(color = Color.Black.copy(alpha = 0.25f))
-                    )
-
-                    Icon(
-                        modifier = Modifier
-                            .align(alignment = Alignment.TopEnd)
-                            .padding(top = 6.dp)
-                            .size(24.dp),
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "More Options",
-                        tint = Color.White,
-                    )
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(alignment = Alignment.BottomStart)
-                            .padding(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text(
-                            text = shortsModel.shortsTitle,
-                            color = Color.White,
-                            style = MaterialTheme.typography.bodySmall,
-                            softWrap = true,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Text(
-                                text = shortsModel.shortsViews,
-                                color = Color.White,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                            Text(
-                                text = "views",
-                                color = Color.White,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                        }
-                    }
-                }
+                Text(
+                    text = shortsModel.shortsViews,
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+                Text(
+                    text = "views",
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodySmall,
+                )
             }
+        }
+    }
+}
+
+@Composable
+fun ShortsContainerLive(shortsModel: ShortsModel) {
+    Box(
+        modifier = Modifier
+            .width(160.dp)
+            .aspectRatio(9f / 16f)
+            .clip(shape = MaterialTheme.shapes.small),
+    ) {
+        Image(
+            modifier = Modifier
+                .fillMaxSize(),
+            painter = painterResource(id = shortsModel.shortsThumbnail),
+            contentDescription = "Shorts Thumbnail",
+            contentScale = ContentScale.Crop
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color.Black.copy(alpha = 0.25f))
+        )
+
+        Icon(
+            modifier = Modifier
+                .align(alignment = Alignment.TopEnd)
+                .padding(top = 6.dp)
+                .size(24.dp),
+            imageVector = Icons.Default.MoreVert,
+            contentDescription = "More Options",
+            tint = Color.White,
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(alignment = Alignment.BottomStart)
+                .padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Text(
+                text = shortsModel.shortsTitle,
+                color = Color.White,
+                style = MaterialTheme.typography.bodySmall,
+                softWrap = true,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .aspectRatio(9f / 16f)
-                        .clip(shape = MaterialTheme.shapes.small),
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        painter = painterResource(id = shortsModel.shortsThumbnail),
-                        contentDescription = "Shorts Thumbnail",
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(color = Color.Black.copy(alpha = 0.25f))
-                    )
-
-                    Icon(
-                        modifier = Modifier
-                            .align(alignment = Alignment.TopEnd)
-                            .padding(top = 6.dp)
-                            .size(24.dp),
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "More Options",
-                        tint = Color.White,
-                    )
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(alignment = Alignment.BottomStart)
-                            .padding(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text(
-                            text = shortsModel.shortsTitle,
-                            color = Color.White,
-                            style = MaterialTheme.typography.bodySmall,
-                            softWrap = true,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Text(
-                                text = shortsModel.shortsViews,
-                                color = Color.White,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                            Text(
-                                text = "views",
-                                color = Color.White,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                        }
-                    }
-                }
-
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .aspectRatio(9f / 16f)
-                        .clip(shape = MaterialTheme.shapes.small),
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        painter = painterResource(id = shortsModel.shortsThumbnail),
-                        contentDescription = "Shorts Thumbnail",
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(color = Color.Black.copy(alpha = 0.25f))
-                    )
-
-                    Icon(
-                        modifier = Modifier
-                            .align(alignment = Alignment.TopEnd)
-                            .padding(top = 6.dp)
-                            .size(24.dp),
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "More Options",
-                        tint = Color.White,
-                    )
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(alignment = Alignment.BottomStart)
-                            .padding(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text(
-                            text = shortsModel.shortsTitle,
-                            color = Color.White,
-                            style = MaterialTheme.typography.bodySmall,
-                            softWrap = true,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Text(
-                                text = shortsModel.shortsViews,
-                                color = Color.White,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                            Text(
-                                text = "views",
-                                color = Color.White,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                        }
-                    }
-                }
+                Text(
+                    text = shortsModel.shortsWatching,
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+                Text(
+                    text = "watching",
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodySmall,
+                )
             }
         }
     }
@@ -532,6 +425,128 @@ fun VideoContainer(videoModel: VideoModel) {
                     )
                     Text(
                         text = "ago",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
+            Icon(
+                modifier = Modifier
+                    .padding(end = 14.dp, top = 14.dp)
+                    .width(14.dp)
+                    .height(14.dp),
+                imageVector = Icons.Default.MoreVert,
+                contentDescription = "More Options",
+                tint = MaterialTheme.colorScheme.onBackground
+            )
+        }
+        Divider(modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp))
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun VideoContainerLive(videoModel: VideoModel) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        Image(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(16f / 9f),
+            painter = painterResource(id = videoModel.videoThumbnail),
+            contentDescription = "Video Thumbnail"
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            Image(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .width(36.dp)
+                    .aspectRatio(ratio = 1f / 1f)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        shape = CircleShape
+                    )
+                    .clip(shape = CircleShape),
+                painter = painterResource(id = videoModel.profileImage),
+                contentDescription = "Video Thumbnail",
+                contentScale = ContentScale.Crop
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .weight(1f)
+                    .padding(top = 12.dp),
+            ) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    text = videoModel.videoTitle,
+                    style = MaterialTheme.typography.labelLarge,
+                    maxLines = 2,
+                    softWrap = true,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                FlowRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = videoModel.channelName,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = "•",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = videoModel.videoWatching,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = "watching",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = "•",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline,
+                        maxLines = 1,
+                        softWrap = true,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = "live",
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.outline,
                         maxLines = 1,
