@@ -113,14 +113,14 @@ fun HomePage() {
                     )
                 }
             ) { innerPadding ->
-                ScrollContent(innerPadding)
+                HomeScreenContent(innerPadding)
             }
         }
     }
 }
 
 @Composable
-fun ScrollContent(innerPadding: PaddingValues) {
+fun HomeScreenContent(innerPadding: PaddingValues) {
     val videoRepository = VideoRepository()
     val videoData = videoRepository.getAllData()
 
