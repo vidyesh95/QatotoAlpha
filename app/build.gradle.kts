@@ -51,6 +51,8 @@ android {
 
 dependencies {
 
+    /*implementation(libs.material3.icons.extended)*/
+    /*implementation(libs.androidx.datastore.core)*/
     implementation(libs.core.ktx)
     implementation(libs.core.splashscreen)
     implementation(libs.lifecycle.runtime.ktx)
@@ -62,7 +64,6 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
     implementation(libs.androidx.navigation.compose)
-    /*implementation(libs.androidx.datastore.core)*/
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
