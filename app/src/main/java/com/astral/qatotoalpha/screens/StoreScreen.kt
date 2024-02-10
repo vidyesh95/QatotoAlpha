@@ -1,7 +1,6 @@
 package com.astral.qatotoalpha.screens
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,7 +14,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -35,56 +33,46 @@ fun StoreScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StorePage() {
-    BoxWithConstraints(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-            Scaffold(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .nestedScroll(connection = scrollBehavior.nestedScrollConnection),
-                topBar = {
-                    TopAppBar(
-                        title = {
-                            Text(
-                                text = "Qatoto",
-                                style = MaterialTheme.typography.titleLarge,
-                                fontFamily = RobotoSerifFontFamily,
-                                fontWeight = FontWeight.Normal
-                            )
-                        },
-                        actions = {
-                            IconButton(onClick = { /*TODO*/ }) {
-                                Icon(
-                                    imageVector = Icons.Outlined.Search,
-                                    contentDescription = "Search"
-                                )
-                            }
-                            IconButton(onClick = { /*TODO*/ }) {
-                                Icon(
-                                    imageVector = Icons.Outlined.ShoppingCart,
-                                    contentDescription = "Shopping Cart"
-                                )
-                            }
-                            IconButton(onClick = { /*TODO*/ }) {
-                                Icon(
-                                    imageVector = Icons.Outlined.AccountCircle,
-                                    contentDescription = "Account"
-                                )
-                            }
-                        },
-                        scrollBehavior = scrollBehavior
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(connection = scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Qatoto",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontFamily = RobotoSerifFontFamily,
+                        fontWeight = FontWeight.Normal
                     )
-                }
-            ) { innerPadding ->
-                StoreScreenContent(innerPadding)
-            }
+                },
+                actions = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Search,
+                            contentDescription = "Search"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Outlined.ShoppingCart,
+                            contentDescription = "Shopping Cart"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Outlined.AccountCircle,
+                            contentDescription = "Account"
+                        )
+                    }
+                },
+                scrollBehavior = scrollBehavior
+            )
         }
+    ) { innerPadding ->
+        StoreScreenContent(innerPadding)
     }
 }
 
