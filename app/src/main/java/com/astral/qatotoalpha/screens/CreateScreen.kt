@@ -10,12 +10,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.AddBusiness
+import androidx.compose.material.icons.outlined.FileUpload
 import androidx.compose.material.icons.outlined.NotificationsNone
+import androidx.compose.material.icons.outlined.PostAdd
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Stream
+import androidx.compose.material.icons.outlined.VideoCall
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -44,44 +52,37 @@ fun CreateScreen() {
 @Composable
 fun CreatePage() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(connection = scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Qatoto",
-                        style = MaterialTheme.typography.titleLarge,
-                        fontFamily = RobotoSerifFontFamily,
-                        fontWeight = FontWeight.Normal
-                    )
-                },
-                actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = Icons.Outlined.NotificationsNone,
-                            contentDescription = "No Notifications"
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = Icons.Outlined.Search,
-                            contentDescription = "Search"
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = Icons.Outlined.AccountCircle,
-                            contentDescription = "Account"
-                        )
-                    }
-                },
-                scrollBehavior = scrollBehavior
+    Scaffold(modifier = Modifier
+        .fillMaxSize()
+        .nestedScroll(connection = scrollBehavior.nestedScrollConnection), topBar = {
+        TopAppBar(title = {
+            Text(
+                text = "Qatoto",
+                style = MaterialTheme.typography.titleLarge,
+                fontFamily = RobotoSerifFontFamily,
+                fontWeight = FontWeight.Normal
             )
-        }
-    ) { innerPadding ->
+        }, actions = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Outlined.NotificationsNone,
+                    contentDescription = "No Notifications"
+                )
+            }
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Outlined.Search, contentDescription = "Search"
+                )
+            }
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Outlined.AccountCircle,
+                    contentDescription = "Account"
+                )
+            }
+        }, scrollBehavior = scrollBehavior
+        )
+    }) { innerPadding ->
         CreateScreenContent(innerPadding)
     }
 }
@@ -91,7 +92,8 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding),
+            .padding(innerPadding)
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -108,22 +110,113 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
                 .wrapContentHeight()
                 .padding(all = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Icon(
-                painterResource(id = R.drawable.outline_swords_24),
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.Outlined.FileUpload,
+                contentDescription = "Upload Video"
+            )
+            Text(
+                text = "Upload Video", style = MaterialTheme.typography.labelLarge
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(all = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.Outlined.AddBusiness,
+                contentDescription = "Create Store Listing"
+            )
+            Text(
+                text = "Create Store Listing", style = MaterialTheme.typography.labelLarge
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(all = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.Outlined.Stream,
+                contentDescription = "Go Live"
+            )
+            Text(
+                text = "Go Live", style = MaterialTheme.typography.labelLarge
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(all = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.Outlined.VideoCall,
+                contentDescription = "Create Short"
+            )
+            Text(
+                text = "Create Short", style = MaterialTheme.typography.labelLarge
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(all = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                painter = painterResource(id = R.drawable.outline_swords_24),
                 contentDescription = "Live Wars"
+            )
+            Text(
+                text = "Live Wars", style = MaterialTheme.typography.labelLarge
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(all = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.Outlined.PostAdd,
+                contentDescription = "Create a Short"
+            )
+            Text(
+                text = "Create Community Post", style = MaterialTheme.typography.labelLarge
             )
         }
     }
 }
 
 @Preview(
-    showBackground = true, name = "Day mode",
+    showBackground = true,
+    name = "Day mode",
     uiMode = Configuration.UI_MODE_NIGHT_NO or Configuration.UI_MODE_TYPE_NORMAL
 )
 @Preview(
-    showBackground = true, name = "Night mode",
+    showBackground = true,
+    name = "Night mode",
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
 @Preview(
