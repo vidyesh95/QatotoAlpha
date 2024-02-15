@@ -11,11 +11,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeOff
+import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.NotificationsNone
 import androidx.compose.material.icons.outlined.Search
@@ -103,6 +106,52 @@ fun AnimeScreenContent(innerPadding: PaddingValues) {
     ) {
         AnimeHero()
         IconButtonRow()
+        LazyAnimeItem()
+    }
+}
+
+@Composable
+fun LazyAnimeItem() {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Recent Episode\uD83D\uDCA1",
+                style = MaterialTheme.typography.titleMedium
+            )
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                contentDescription = "More Recent Episode"
+            )
+        }
+        Column(
+            modifier = Modifier.width(width = 158.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(ratio = 16f / 9f)
+                    .clip(shape = MaterialTheme.shapes.extraSmall),
+                painter = painterResource(id = R.drawable.anime_landscape_thumbnail_1),
+                contentDescription = "Recent Video"
+            )
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 32.dp),
+                text = "God Troubles Me Season 3",
+                style = MaterialTheme.typography.labelSmall,
+                softWrap = true,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
     }
 }
 
@@ -240,6 +289,7 @@ fun IconButtonRow() {
 )
 @Composable
 fun AnimeScreenPreview() {
-    AnimeHero()
+    //AnimeHero()
     //IconButtonRow()
+    LazyAnimeItem()
 }
