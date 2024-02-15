@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
@@ -122,9 +123,21 @@ fun AnimeHero() {
             contentDescription = "Anime Video Thumbnail",
             contentScale = ContentScale.Crop
         )
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.25f)))
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.verticalGradient(
+                        listOf(
+                            Color.Black.copy(alpha = 0.25f),
+                            Color.Transparent,
+                            Color.Transparent,
+                            Color.Transparent,
+                            Color.Black.copy(alpha = 0.75f)
+                        )
+                    )
+                )
+        )
         Icon(
             modifier = Modifier
                 .align(alignment = Alignment.TopEnd)
