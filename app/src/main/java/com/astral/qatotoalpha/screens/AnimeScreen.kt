@@ -16,8 +16,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeOff
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
@@ -44,11 +46,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewDynamicColors
+import androidx.compose.ui.tooling.preview.PreviewFontScale
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
 import com.astral.qatotoalpha.util.model.AnimeModel
+import com.astral.qatotoalpha.util.model.AnimeScreenModel
 import com.astral.qatotoalpha.util.repository.AnimeRepository
+import com.astral.qatotoalpha.util.repository.AnimeScreenRepository
 
 @Composable
 fun AnimeScreen() {
@@ -98,90 +106,6 @@ fun AnimePage() {
         }
     ) { innerPadding ->
         AnimeScreenContent(innerPadding)
-    }
-}
-
-@Composable
-fun AnimeScreenContent(innerPadding: PaddingValues) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding)
-    ) {
-        AnimeHero()
-        IconButtonRow()
-        LazyAnimeColumnItem()
-    }
-}
-
-@Composable
-fun LazyAnimeRow() {
-    val animeRepository = AnimeRepository()
-    val animeData = animeRepository.getAllData()
-
-    LazyRow(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 8.dp)
-    ) {
-        items(
-            items = animeData.sortedBy { it.recentEpisodeRank }.take(6),
-            key = {
-                it.videoId
-            }
-        ) { item ->
-            LazyAnimeRowItem(animeModel = item)
-        }
-    }
-}
-
-@Composable
-fun LazyAnimeRowItem(animeModel: AnimeModel) {
-    Column(
-        modifier = Modifier.width(width = 158.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-        Image(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(ratio = 16f / 9f)
-                .clip(shape = MaterialTheme.shapes.extraSmall),
-            painter = painterResource(id = animeModel.videoThumbnail),
-            contentDescription = "Recent Video"
-        )
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = 32.dp),
-            text = animeModel.videoTitle,
-            style = MaterialTheme.typography.labelSmall,
-            softWrap = true,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis
-        )
-    }
-}
-
-@Composable
-fun LazyAnimeColumnItem() {
-    Column {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Recent Episode\uD83D\uDCA1",
-                style = MaterialTheme.typography.titleMedium
-            )
-            Icon(
-                imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
-                contentDescription = "More Recent Episode"
-            )
-        }
-        LazyAnimeRow()
     }
 }
 
@@ -303,7 +227,116 @@ fun IconButtonRow() {
     }
 }
 
-@Preview(
+@Composable
+fun LazyAnimeRowItem(animeModel: AnimeModel) {
+    Column(
+        modifier = Modifier.width(width = 158.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Image(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(ratio = 16f / 9f)
+                .clip(shape = MaterialTheme.shapes.extraSmall),
+            painter = painterResource(id = animeModel.videoThumbnail),
+            contentDescription = "Recent Video"
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 32.dp),
+            text = animeModel.videoTitle,
+            style = MaterialTheme.typography.labelSmall,
+            softWrap = true,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
+    }
+}
+
+@Composable
+fun LazyAnimeRow(item: AnimeScreenModel) {
+    val animeRepository = AnimeRepository()
+    val animeData = animeRepository.getAllData()
+    LazyRow(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 8.dp),
+    ) {
+        items(
+            items = when(item.rowSort) {
+                "recentEpisodeRank" -> animeData.sortedBy { it.recentEpisodeRank }
+                "recommendedForYouRank" -> animeData.sortedBy { it.recommendedForYouRank }
+                "completedSeriesRank" -> animeData.sortedBy { it.completedSeriesRank }
+                "trendingRank" -> animeData.sortedBy { it.trendingRank }
+                "newArrivalRank" -> animeData.sortedBy { it.newArrivalRank }
+                else -> animeData
+            }.take(6),
+            key = {
+                it.videoId
+            }
+        ) { item ->
+            LazyAnimeRowItem(animeModel = item)
+        }
+    }
+}
+
+@Composable
+fun LazyAnimeColumnItem(item: AnimeScreenModel) {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = item.rowTitle,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                contentDescription = "More Recent Episode"
+            )
+        }
+        LazyAnimeRow(item = item)
+    }
+}
+
+@Composable
+fun AnimeScreenContent(innerPadding: PaddingValues) {
+    val animeScreenRepository = AnimeScreenRepository()
+    val animeScreenData = animeScreenRepository.getAllData()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
+    ) {
+        itemsIndexed(
+            items = animeScreenData,
+            key = { index, item ->
+                "${index}-${item.rowId}"
+            }
+        ) { index, item ->
+            if (index == 0) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                ) {
+                    AnimeHero()
+                    IconButtonRow()
+                }
+            }
+            LazyAnimeColumnItem(item = item)
+        }
+    }
+}
+
+
+/*@Preview(
     showBackground = true, name = "Day mode",
     uiMode = Configuration.UI_MODE_NIGHT_NO or Configuration.UI_MODE_TYPE_NORMAL
 )
@@ -316,10 +349,14 @@ fun IconButtonRow() {
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO or Configuration.UI_MODE_TYPE_NORMAL,
     device = "id:pixel_c"
-)
+)*/
+@PreviewScreenSizes
+@PreviewFontScale
+@PreviewLightDark
+@PreviewDynamicColors
 @Composable
 fun AnimeScreenPreview() {
-    //AnimeHero()
+    AnimeHero()
     //IconButtonRow()
-    LazyAnimeColumnItem()
+    //LazyAnimeColumnItem()
 }
