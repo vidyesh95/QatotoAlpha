@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeOff
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
@@ -45,6 +47,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
+import com.astral.qatotoalpha.util.model.AnimeModel
+import com.astral.qatotoalpha.util.repository.AnimeRepository
 
 @Composable
 fun AnimeScreen() {
@@ -106,12 +110,60 @@ fun AnimeScreenContent(innerPadding: PaddingValues) {
     ) {
         AnimeHero()
         IconButtonRow()
-        LazyAnimeItem()
+        LazyAnimeColumnItem()
     }
 }
 
 @Composable
-fun LazyAnimeItem() {
+fun LazyAnimeRow() {
+    val animeRepository = AnimeRepository()
+    val animeData = animeRepository.getAllData()
+
+    LazyRow(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 8.dp)
+    ) {
+        items(
+            items = animeData.sortedBy { it.recentEpisodeRank }.take(6),
+            key = {
+                it.videoId
+            }
+        ) { item ->
+            LazyAnimeRowItem(animeModel = item)
+        }
+    }
+}
+
+@Composable
+fun LazyAnimeRowItem(animeModel: AnimeModel) {
+    Column(
+        modifier = Modifier.width(width = 158.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Image(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(ratio = 16f / 9f)
+                .clip(shape = MaterialTheme.shapes.extraSmall),
+            painter = painterResource(id = animeModel.videoThumbnail),
+            contentDescription = "Recent Video"
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 32.dp),
+            text = animeModel.videoTitle,
+            style = MaterialTheme.typography.labelSmall,
+            softWrap = true,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
+    }
+}
+
+@Composable
+fun LazyAnimeColumnItem() {
     Column {
         Row(
             modifier = Modifier
@@ -129,29 +181,7 @@ fun LazyAnimeItem() {
                 contentDescription = "More Recent Episode"
             )
         }
-        Column(
-            modifier = Modifier.width(width = 158.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(ratio = 16f / 9f)
-                    .clip(shape = MaterialTheme.shapes.extraSmall),
-                painter = painterResource(id = R.drawable.anime_landscape_thumbnail_1),
-                contentDescription = "Recent Video"
-            )
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = 32.dp),
-                text = "God Troubles Me Season 3",
-                style = MaterialTheme.typography.labelSmall,
-                softWrap = true,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
+        LazyAnimeRow()
     }
 }
 
@@ -291,5 +321,5 @@ fun IconButtonRow() {
 fun AnimeScreenPreview() {
     //AnimeHero()
     //IconButtonRow()
-    LazyAnimeItem()
+    LazyAnimeColumnItem()
 }
