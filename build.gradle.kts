@@ -3,3 +3,12 @@ plugins {
     alias(libs.plugins.com.android.application) apply false
     alias(libs.plugins.org.jetbrains.kotlin.android) apply false
 }
+tasks.register<Delete>("clean") {
+    delete(rootProject.layout.buildDirectory)
+}
+/*tasks.register("cleanInstallDebug") {
+    dependsOn("clean", "installDebug")
+}*/
+/*tasks.register("cleanRun") {
+    dependsOn("clean", "run")
+}*/
