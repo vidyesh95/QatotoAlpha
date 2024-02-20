@@ -151,7 +151,7 @@ fun HomeScreenContent(innerPadding: PaddingValues) {
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(
-                            items = shortsData,
+                            items = shortsData.take(6),
                             key = {
                                 it.shortsId
                             }
