@@ -9,6 +9,6 @@ tasks.register<Delete>("clean") {
 /*tasks.register("cleanInstallDebug") {
     dependsOn("clean", "installDebug")
 }*/
-/*tasks.register("cleanRun") {
+tasks.register("cleanRun") {
     dependsOn("clean", "run")
-}*/
+}
