@@ -61,7 +61,7 @@ class ShortsRepository {
             ShortsModel(
                 shortsId = "5",
                 isLive = false,
-                shortsThumbnail = R.drawable.shorts_thumbnail_1,
+                shortsThumbnail = R.drawable.shorts_thumbnail_5,
                 profileImage = R.drawable.profile_image_1,
                 shortsTitle = "Shorts 5",
                 channelName = "channel 5",
@@ -74,7 +74,7 @@ class ShortsRepository {
             ShortsModel(
                 shortsId = "6",
                 isLive = false,
-                shortsThumbnail = R.drawable.shorts_thumbnail_2,
+                shortsThumbnail = R.drawable.shorts_thumbnail_6,
                 profileImage = R.drawable.profile_image_2,
                 shortsTitle = "shorts 6",
                 channelName = "channel 6",
@@ -87,7 +87,7 @@ class ShortsRepository {
             ShortsModel(
                 shortsId = "7",
                 isLive = true,
-                shortsThumbnail = R.drawable.shorts_thumbnail_3,
+                shortsThumbnail = R.drawable.shorts_thumbnail_7,
                 profileImage = R.drawable.profile_image_3,
                 shortsTitle = "shorts 7",
                 channelName = "channel 7",
@@ -100,7 +100,7 @@ class ShortsRepository {
             ShortsModel(
                 shortsId = "8",
                 isLive = true,
-                shortsThumbnail = R.drawable.shorts_thumbnail_4,
+                shortsThumbnail = R.drawable.shorts_thumbnail_8,
                 profileImage = R.drawable.profile_image_4,
                 shortsTitle = "shorts 8",
                 channelName = "channel 8",
