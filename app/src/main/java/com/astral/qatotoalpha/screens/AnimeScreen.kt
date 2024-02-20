@@ -1,6 +1,5 @@
 package com.astral.qatotoalpha.screens
 
-import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -45,7 +44,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewDynamicColors
 import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -117,6 +115,7 @@ fun AnimeHero() {
             .fillMaxWidth()
             .aspectRatio(ratio = 16f / 9f)
             .clip(shape = MaterialTheme.shapes.medium)
+            .background(color = Color.Black)
     ) {
         Image(
             modifier = Modifier

@@ -38,6 +38,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -129,7 +130,7 @@ fun Carousel() {
             .aspectRatio(16f / 9f)
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .clip(shape = MaterialTheme.shapes.medium)
-            .background(color = MaterialTheme.colorScheme.primaryContainer)
+            .background(color = Color.Black)
     ) {
         Image(
             modifier = Modifier
