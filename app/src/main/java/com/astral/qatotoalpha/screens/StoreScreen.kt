@@ -11,20 +11,24 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.Category
 import androidx.compose.material.icons.outlined.DirectionsBoat
 import androidx.compose.material.icons.outlined.Factory
 import androidx.compose.material.icons.outlined.Forum
 import androidx.compose.material.icons.outlined.Group
 import androidx.compose.material.icons.outlined.RequestQuote
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Shop
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -49,6 +53,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
+import com.astral.qatotoalpha.util.model.ProductModel
+import com.astral.qatotoalpha.util.model.StorePathwayModel
+import com.astral.qatotoalpha.util.model.StoreScreenModel
+import com.astral.qatotoalpha.util.repository.ProductRepository
+import com.astral.qatotoalpha.util.repository.StorePathwayRepository
+import com.astral.qatotoalpha.util.repository.StoreScreenRepository
 
 @Composable
 fun StoreScreen() {
@@ -102,24 +112,219 @@ fun StorePage() {
 }
 
 @Composable
-fun StoreScreenContent(innerPadding: PaddingValues) {
+fun LazyProductRowItem(product: ProductModel) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding)
-            .verticalScroll(rememberScrollState())
+            .width(width = 140.dp)
+            .wrapContentHeight()
+            .clip(shape = MaterialTheme.shapes.small),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        Carousel()
-        Categories()
-        BusinessCards()
-        LazyStoreRow()
+        Image(
+            modifier = Modifier
+                .width(width = 140.dp)
+                .aspectRatio(3f / 4f)
+                .clip(shape = MaterialTheme.shapes.small),
+            painter = painterResource(id = product.productThumbnail),
+            contentDescription = product.productTitle,
+            contentScale = ContentScale.Crop
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 32.dp),
+            text = product.productTitle,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.labelSmall,
+            textAlign = TextAlign.Center,
+            softWrap = true,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
     }
 }
 
 @Composable
-fun LazyStoreRow() {
-    //val storeRepository = StoreRepository()
-    //val animeData = storeRepository.getAllData()
+fun LazyProductRow(item: StoreScreenModel) {
+    val productRepository = ProductRepository()
+    val productData = productRepository.getAllData()
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+    ) {
+        items(
+            items = when (item.columnSort) {
+                "whatsNew" -> productData.sortedBy { it.productRecentRank }
+                "popular" -> productData.sortedBy { it.productPopularityRank }
+                "forYou" -> productData.sortedBy { it.productRank }
+                "trending" -> productData.sortedBy { it.productTrendingRank }
+                else -> productData
+            }.take(6),
+            key = {
+                it.productId
+            }
+        ) { item ->
+            LazyProductRowItem(product = item)
+        }
+    }
+}
+
+@Composable
+fun LazyStoreRow(item: StoreScreenModel) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(vertical = 8.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = item.columnTitle,
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                contentDescription = "More ${item.columnTitle}",
+                tint = MaterialTheme.colorScheme.onSurface
+            )
+        }
+        LazyProductRow(item = item)
+    }
+}
+
+
+@Composable
+fun Starter() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        Carousel()
+        Categories()
+        Pathways()
+        BusinessCards()
+    }
+}
+
+@Composable
+fun StoreScreenContent(innerPadding: PaddingValues) {
+    val storeScreenRepository = StoreScreenRepository()
+    val storeScreenData = storeScreenRepository.getAllData()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
+    ) {
+        itemsIndexed(
+            items = storeScreenData,
+            key = { index, item ->
+                "${index}-${item.columnId}"
+            }
+        ) { index, item ->
+            if (index == 0) {
+                Starter()
+            }
+            LazyStoreRow(item = item)
+        }
+    }
+}
+
+@Composable
+fun Pathways() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(vertical = 8.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Pathways\uD83D\uDCA1",
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                contentDescription = "More Recent Pathways",
+                tint = MaterialTheme.colorScheme.onSurface
+            )
+        }
+        LazyStorePathwayRow()
+    }
+}
+
+@Composable
+fun LazyStorePathwayRow() {
+    val storePathwayRepository = StorePathwayRepository()
+    val storePathwayData = storePathwayRepository.getAllData()
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+    ) {
+        items(
+            items = storePathwayData.sortedBy { it.storePathwayRank }.take(6),
+            key = {
+                it.storePathwayId
+            }
+        ) { item ->
+            LazyStorePathwayRowItem(storePathway = item)
+        }
+    }
+}
+
+@Composable
+fun LazyStorePathwayRowItem(storePathway: StorePathwayModel) {
+    Column(
+        modifier = Modifier
+            .width(width = 140.dp)
+            .wrapContentHeight()
+            .clip(shape = MaterialTheme.shapes.small),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Image(
+            modifier = Modifier
+                .width(width = 140.dp)
+                .aspectRatio(3f / 4f)
+                .clip(shape = MaterialTheme.shapes.small),
+            painter = painterResource(id = storePathway.storePathwayThumbnail),
+            contentDescription = storePathway.storePathwayTitle,
+            contentScale = ContentScale.Crop
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 32.dp),
+            text = storePathway.storePathwayTitle,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.labelSmall,
+            textAlign = TextAlign.Center,
+            softWrap = true,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
+    }
 }
 
 @Composable
@@ -325,8 +530,8 @@ fun BusinessCards() {
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Outlined.Category,
-                        contentDescription = "All Categories",
+                        imageVector = Icons.Outlined.Shop,
+                        contentDescription = "Live Sale",
                         tint = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
@@ -334,7 +539,7 @@ fun BusinessCards() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentHeight(),
-                    text = "All Categories",
+                    text = "Live Sale",
                     color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.labelSmall,
                     textAlign = TextAlign.Center,
@@ -551,6 +756,7 @@ fun BusinessCards() {
 @PreviewDynamicColors*/
 @Composable
 fun StoreScreenPreview() {
-    StorePage()
+    //StorePage()
     //Categories()
+    Pathways()
 }
