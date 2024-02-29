@@ -1,4 +1,4 @@
-package com.astral.qatotoalpha.screens
+package com.astral.qatotoalpha.feature.firsttime.presentation
 
 import android.content.Context
 import android.content.res.Configuration
@@ -32,7 +32,7 @@ import androidx.navigation.NavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.ui.theme.Typography
-import com.astral.qatotoalpha.util.Screen
+import com.astral.qatotoalpha.util.FirstTimeScreen
 
 @Composable
 fun FirstScreen(navController: NavController) {
@@ -78,9 +78,9 @@ fun TermsPageContainer(navController: NavController) {
                     putBoolean("isContinueAccepted", true)
                     apply()
                 }
-                navController.navigate(Screen.MainScreen.route) {
+                navController.navigate(FirstTimeScreen.MainScreen.route) {
                     // Clears all previous destinations up to (and optionally including) the specified destination
-                    popUpTo(Screen.FirstScreen.route) {
+                    popUpTo(FirstTimeScreen.FirstScreen.route) {
                         inclusive = true
                     }
                 }

@@ -5,21 +5,21 @@ fun MainNavigationGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         route = Graph.MAIN,
-        startDestination = Screen.HomeScreen.route
+        startDestination = FirstScreen.HomeScreen.route
     ) {
-        composable(route = Screen.HomeScreen.route) {
+        composable(route = FirstScreen.HomeScreen.route) {
             HomeScreen()
         }
-        composable(route = Screen.AnimeScreen.route) {
+        composable(route = FirstScreen.AnimeScreen.route) {
             AnimeScreen()
         }
-        composable(route = Screen.CreateScreen.route) {
+        composable(route = FirstScreen.CreateScreen.route) {
             CreateScreen()
         }
-        composable(route = Screen.StoreScreen.route) {
+        composable(route = FirstScreen.StoreScreen.route) {
             StoreScreen()
         }
-        composable(route = Screen.AnimeScreen.route) {
+        composable(route = FirstScreen.AnimeScreen.route) {
             ShortsScreen()
         }
     }

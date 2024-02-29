@@ -1,4 +1,4 @@
-package com.astral.qatotoalpha.screens
+package com.astral.qatotoalpha.feature.shorts.presentation
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
