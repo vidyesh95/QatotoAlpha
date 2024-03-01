@@ -105,7 +105,7 @@ fun ContinueText(modifier: Modifier) {
 @Composable
 fun ContinueButton(modifier: Modifier, onClick: () -> Unit) {
     FilledIconButton(modifier = modifier, onClick = { onClick() }) {
-        Text(text = "Continue")
+        Text(text = stringResource(id = R.string.continue_text))
     }
 }
 
