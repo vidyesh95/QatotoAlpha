@@ -203,5 +203,5 @@ fun AnnotatedClickableText() {
 )
 @Composable
 fun FirstScreenPreview() {
-    //FirstPage()
+    //FirstPage(navController = NavController(LocalContext.current))
 }
