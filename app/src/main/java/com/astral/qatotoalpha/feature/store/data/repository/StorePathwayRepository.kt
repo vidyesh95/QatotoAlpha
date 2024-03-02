@@ -1,7 +1,7 @@
-package com.astral.qatotoalpha.util.repository
+package com.astral.qatotoalpha.feature.store.data.repository
 
 import com.astral.qatotoalpha.R
-import com.astral.qatotoalpha.util.model.StorePathwayModel
+import com.astral.qatotoalpha.feature.store.domain.model.StorePathwayModel
 
 class StorePathwayRepository {
     fun getAllData() = listOf(

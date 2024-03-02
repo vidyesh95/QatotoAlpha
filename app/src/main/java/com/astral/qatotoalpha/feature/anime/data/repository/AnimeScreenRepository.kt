@@ -1,6 +1,6 @@
-package com.astral.qatotoalpha.util.repository
+package com.astral.qatotoalpha.feature.anime.data.repository
 
-import com.astral.qatotoalpha.util.model.AnimeScreenModel
+import com.astral.qatotoalpha.feature.anime.domain.model.AnimeScreenModel
 
 class AnimeScreenRepository {
     fun getAllData() = listOf(

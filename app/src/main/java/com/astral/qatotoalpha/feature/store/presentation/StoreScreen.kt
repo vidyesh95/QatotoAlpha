@@ -52,13 +52,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.feature.store.data.repository.ProductRepository
+import com.astral.qatotoalpha.feature.store.data.repository.StorePathwayRepository
+import com.astral.qatotoalpha.feature.store.data.repository.StoreScreenRepository
+import com.astral.qatotoalpha.feature.store.domain.model.ProductModel
+import com.astral.qatotoalpha.feature.store.domain.model.StorePathwayModel
+import com.astral.qatotoalpha.feature.store.domain.model.StoreScreenModel
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
-import com.astral.qatotoalpha.util.model.ProductModel
-import com.astral.qatotoalpha.util.model.StorePathwayModel
-import com.astral.qatotoalpha.util.model.StoreScreenModel
-import com.astral.qatotoalpha.util.repository.ProductRepository
-import com.astral.qatotoalpha.util.repository.StorePathwayRepository
-import com.astral.qatotoalpha.util.repository.StoreScreenRepository
 
 @Composable
 fun StoreScreen() {

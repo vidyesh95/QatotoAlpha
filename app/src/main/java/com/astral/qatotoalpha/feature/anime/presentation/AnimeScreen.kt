@@ -50,11 +50,11 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.feature.anime.data.repository.AnimeRepository
+import com.astral.qatotoalpha.feature.anime.data.repository.AnimeScreenRepository
+import com.astral.qatotoalpha.feature.anime.domain.model.AnimeModel
+import com.astral.qatotoalpha.feature.anime.domain.model.AnimeScreenModel
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
-import com.astral.qatotoalpha.util.model.AnimeModel
-import com.astral.qatotoalpha.util.model.AnimeScreenModel
-import com.astral.qatotoalpha.util.repository.AnimeRepository
-import com.astral.qatotoalpha.util.repository.AnimeScreenRepository
 
 @Composable
 fun AnimeScreen() {

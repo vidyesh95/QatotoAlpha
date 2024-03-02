@@ -1,7 +1,7 @@
-package com.astral.qatotoalpha.util.repository
+package com.astral.qatotoalpha.feature.store.data.repository
 
 import com.astral.qatotoalpha.R
-import com.astral.qatotoalpha.util.model.ProductModel
+import com.astral.qatotoalpha.feature.store.domain.model.ProductModel
 
 class ProductRepository {
     fun getAllData() = listOf(

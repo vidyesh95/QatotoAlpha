@@ -1,6 +1,6 @@
-package com.astral.qatotoalpha.util.repository
+package com.astral.qatotoalpha.feature.store.data.repository
 
-import com.astral.qatotoalpha.util.model.StoreScreenModel
+import com.astral.qatotoalpha.feature.store.domain.model.StoreScreenModel
 
 class StoreScreenRepository {
     fun getAllData() = listOf(

@@ -1,7 +1,7 @@
-package com.astral.qatotoalpha.util.repository
+package com.astral.qatotoalpha.feature.home.data.repository
 
 import com.astral.qatotoalpha.R
-import com.astral.qatotoalpha.util.model.VideoModel
+import com.astral.qatotoalpha.feature.home.domain.model.VideoModel
 
 class VideoRepository {
     fun getAllData(): List<VideoModel> {

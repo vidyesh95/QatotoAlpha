@@ -1,7 +1,7 @@
-package com.astral.qatotoalpha.util.repository
+package com.astral.qatotoalpha.feature.shorts.data.repository
 
 import com.astral.qatotoalpha.R
-import com.astral.qatotoalpha.util.model.ShortsModel
+import com.astral.qatotoalpha.feature.shorts.domain.model.ShortsModel
 
 class ShortsRepository {
     fun getAllData(): List<ShortsModel> {
@@ -11,7 +11,7 @@ class ShortsRepository {
                 isLive = false,
                 shortsThumbnail = R.drawable.shorts_thumbnail_1,
                 profileImage = R.drawable.profile_image_1,
-                shortsTitle = "Pomporo singing \uD83C\uDF3CFengzhi Senai\uD83C\uDF3C at Disney Land",
+                shortsTitle = "Macron hosts Sunak at Elysee Palace Sunak: It's new start.",
                 channelName = "Arin Light",
                 shortsWatching = "0",
                 shortsViews = "2.5M",

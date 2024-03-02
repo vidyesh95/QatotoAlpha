@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -47,6 +49,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.feature.shorts.data.repository.ShortsRepository
+import com.astral.qatotoalpha.feature.shorts.domain.model.ShortsModel
 
 @Composable
 fun ShortsScreen() {
@@ -55,6 +59,27 @@ fun ShortsScreen() {
 
 @Composable
 fun ShortsPage() {
+    val shortsRepository = ShortsRepository()
+    val shortsData = shortsRepository.getAllData()
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(0.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        itemsIndexed(
+            items = shortsData,
+            key = { _, item ->
+                item.shortsId
+            },
+            itemContent = { _, item ->
+                ShortsItem(shortsModel = item)
+            }
+        )
+    }
+}
+
+@Composable
+fun ShortsItem(shortsModel: ShortsModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -66,7 +91,7 @@ fun ShortsPage() {
                 .fillMaxWidth()
                 .aspectRatio(9f / 16f)
                 .align(Alignment.Center),
-            painter = painterResource(id = R.drawable.shorts_thumbnail_1),
+            painter = painterResource(id = shortsModel.shortsThumbnail),
             contentDescription = "Video Thumbnail",
             contentScale = androidx.compose.ui.layout.ContentScale.Crop
         )
@@ -385,7 +410,7 @@ fun ShortsPage() {
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight(),
-                        text = "Macron hosts Sunak at Elysee Palace Sunak: It's new start.",
+                        text = shortsModel.shortsTitle,
                         style = MaterialTheme.typography.labelSmall,
                         textAlign = TextAlign.Start,
                         color = Color.White,

@@ -1,7 +1,7 @@
-package com.astral.qatotoalpha.util.repository
+package com.astral.qatotoalpha.feature.anime.data.repository
 
 import com.astral.qatotoalpha.R
-import com.astral.qatotoalpha.util.model.AnimeModel
+import com.astral.qatotoalpha.feature.anime.domain.model.AnimeModel
 
 class AnimeRepository {
     fun getAllData() = listOf(

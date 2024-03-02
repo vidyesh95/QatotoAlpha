@@ -1,4 +1,4 @@
-package com.astral.qatotoalpha.util.model
+package com.astral.qatotoalpha.feature.anime.domain.model
 
 import androidx.annotation.DrawableRes
 

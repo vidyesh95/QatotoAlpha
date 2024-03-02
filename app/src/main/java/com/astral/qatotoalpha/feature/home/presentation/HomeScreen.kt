@@ -50,11 +50,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.astral.qatotoalpha.feature.home.data.repository.VideoRepository
+import com.astral.qatotoalpha.feature.home.domain.model.VideoModel
+import com.astral.qatotoalpha.feature.shorts.data.repository.ShortsRepository
+import com.astral.qatotoalpha.feature.shorts.domain.model.ShortsModel
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
-import com.astral.qatotoalpha.util.model.ShortsModel
-import com.astral.qatotoalpha.util.model.VideoModel
-import com.astral.qatotoalpha.util.repository.ShortsRepository
-import com.astral.qatotoalpha.util.repository.VideoRepository
 
 @Composable
 fun HomeScreen() {

@@ -1,4 +1,4 @@
-package com.astral.qatotoalpha.util.model
+package com.astral.qatotoalpha.feature.store.domain.model
 
 data class StoreScreenModel(
     val columnId: String,
