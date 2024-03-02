@@ -1,6 +1,8 @@
 package com.astral.qatotoalpha.feature.shorts.presentation
 
 import android.content.res.Configuration
+import android.util.Log
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -18,8 +20,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.pager.VerticalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -36,6 +38,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
@@ -57,24 +61,30 @@ fun ShortsScreen() {
     ShortsPage()
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ShortsPage() {
     val shortsRepository = ShortsRepository()
     val shortsData = shortsRepository.getAllData()
-    LazyColumn(
+    val pagerState = rememberPagerState(pageCount = { shortsData.size })
+
+    LaunchedEffect(pagerState) {
+        // Collect from the a snapshotFlow reading the currentPage
+        snapshotFlow { pagerState.currentPage }.collect { page ->
+            // Do something with each page change, for example:
+            // viewModel.sendPageSelectedEvent(page)
+            Log.d("Page change", "Page changed to $page")
+        }
+    }
+
+    VerticalPager(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(0.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        itemsIndexed(
-            items = shortsData,
-            key = { _, item ->
-                item.shortsId
-            },
-            itemContent = { _, item ->
-                ShortsItem(shortsModel = item)
-            }
-        )
+        state = pagerState,
+        key = { item ->
+            item
+        },
+    ) { currentPage ->
+        ShortsItem(shortsModel = shortsData[currentPage])
     }
 }
 
