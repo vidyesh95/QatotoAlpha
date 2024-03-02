@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -98,8 +97,7 @@ fun ShortsItem(shortsModel: ShortsModel) {
     ) {
         Image(
             modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(9f / 16f)
+                .fillMaxSize()
                 .align(Alignment.Center),
             painter = painterResource(id = shortsModel.shortsThumbnail),
             contentDescription = "Video Thumbnail",
@@ -540,7 +538,7 @@ fun ShortsItem(shortsModel: ShortsModel) {
                             )
                             .padding(all = 2.dp),
                         painter = painterResource(
-                            id = R.drawable.profile_image_4
+                            id = shortsModel.profileImage
                         ),
                         contentDescription = "Profile Image",
                     )
