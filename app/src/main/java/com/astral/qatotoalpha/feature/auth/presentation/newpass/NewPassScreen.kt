@@ -69,7 +69,7 @@ fun NewPassScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewPassPage() {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),

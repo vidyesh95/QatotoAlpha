@@ -59,7 +59,7 @@ fun ForgotPassScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ForgotPassPage() {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),

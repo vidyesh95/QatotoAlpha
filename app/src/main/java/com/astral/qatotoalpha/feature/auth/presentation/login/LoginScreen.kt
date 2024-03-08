@@ -48,7 +48,7 @@ fun LoginScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginPage() {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
