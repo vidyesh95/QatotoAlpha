@@ -2,10 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="FirstScreenPreview - Night mode">
-        <State />
-      </entry>
-      <entry key="MainActivity">
+      <entry key="LoginWithPassScreenPreview">
         <State>
           <targetSelectedWithDropDown>
             <Target>
@@ -13,13 +10,25 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="$USER_HOME$/.android/avd/Pixel_7_Pro_API_34.avd" />
+                  <value value="$USER_HOME$/.android/avd/Pixel_8_API_34.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-02-26T03:41:27.367055Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-03-06T12:01:49.793178Z" />
         </State>
+      </entry>
+      <entry key="MainActivity">
+        <State />
+      </entry>
+      <entry key="NewPassScreenPreview">
+        <State />
+      </entry>
+      <entry key="ProfileScreenPreview">
+        <State />
+      </entry>
+      <entry key="RegisterScreenPreview">
+        <State />
       </entry>
     </value>
   </component>

@@ -91,7 +91,8 @@ fun CreatePage() {
 fun CreateScreenContent(innerPadding: PaddingValues) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .wrapContentHeight()
             .padding(innerPadding)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
