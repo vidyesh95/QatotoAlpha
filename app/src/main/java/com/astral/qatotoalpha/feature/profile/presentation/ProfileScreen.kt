@@ -38,6 +38,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -272,7 +273,7 @@ fun ProfileItem(item: ProfileScreenModel) {
         Icon(
             modifier = Modifier.size(24.dp),
             imageVector = item.profileImageVector,
-            contentDescription = item.profileText,
+            contentDescription = stringResource(id = item.profileText),
             tint = MaterialTheme.colorScheme.onBackground
         )
         Text(
@@ -280,7 +281,7 @@ fun ProfileItem(item: ProfileScreenModel) {
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .weight(1f),
-            text = item.profileText,
+            text = stringResource(id = item.profileText),
             textAlign = TextAlign.Start,
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.onBackground,
@@ -291,7 +292,7 @@ fun ProfileItem(item: ProfileScreenModel) {
         Icon(
             modifier = Modifier.size(24.dp),
             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-            contentDescription = item.profileText,
+            contentDescription = stringResource(id = item.profileText),
             tint = MaterialTheme.colorScheme.onBackground
         )
     }

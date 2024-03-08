@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.PrivacyTip
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.StarRate
 import androidx.compose.material.icons.filled.Storage
+import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.feature.profile.domain.ProfileScreenModel
 
 class ProfileScreenRepository {
@@ -24,77 +25,77 @@ class ProfileScreenRepository {
             ProfileScreenModel(
                 profileId = 0,
                 profileImageVector = Icons.Filled.ModeNight,
-                profileText = "Night light"
+                profileText = R.string.night_light
             ),
             ProfileScreenModel(
                 profileId = 1,
                 profileImageVector = Icons.Filled.InvertColors,
-                profileText = "App theme"
+                profileText = R.string.app_theme
             ),
             ProfileScreenModel(
                 profileId = 2,
                 profileImageVector = Icons.Filled.NoAccounts,
-                profileText = "Turn on incognito"
+                profileText = R.string.turn_on_incognito
             ),
             ProfileScreenModel(
                 profileId = 3,
                 profileImageVector = Icons.Filled.Language,
-                profileText = "App language"
+                profileText = R.string.app_language
             ),
             ProfileScreenModel(
                 profileId = 4,
                 profileImageVector = Icons.Filled.Settings,
-                profileText = "Settings"
+                profileText = R.string.settings
             ),
             ProfileScreenModel(
                 profileId = 5,
                 profileImageVector = Icons.Filled.ModeOfTravel,
-                profileText = "Drive mode"
+                profileText = R.string.drive_mode
             ),
             ProfileScreenModel(
                 profileId = 6,
                 profileImageVector = Icons.Filled.ChildCare,
-                profileText = "Child mode"
+                profileText = R.string.child_mode
             ),
             ProfileScreenModel(
                 profileId = 7,
                 profileImageVector = Icons.Filled.BarChart,
-                profileText = "Time watched"
+                profileText = R.string.time_watched
             ),
             ProfileScreenModel(
                 profileId = 8,
                 profileImageVector = Icons.Filled.Storage,
-                profileText = "Your data in app account"
+                profileText = R.string.your_data_in_app_account
             ),
             ProfileScreenModel(
                 profileId = 9,
                 profileImageVector = Icons.Filled.StarRate,
-                profileText = "Rate us on play store"
+                profileText = R.string.rate_us_on_play_store
             ),
             ProfileScreenModel(
                 profileId = 10,
                 profileImageVector = Icons.Filled.Feedback,
-                profileText = "Feedback"
+                profileText = R.string.feedback
             ),
             ProfileScreenModel(
                 profileId = 11,
                 profileImageVector = Icons.Filled.Forum,
-                profileText = "Forum"
+                profileText = R.string.forum
             ),
             ProfileScreenModel(
                 profileId = 12,
                 profileImageVector = Icons.AutoMirrored.Filled.HelpCenter,
-                profileText = "Help center"
+                profileText = R.string.help_center
             ),
             ProfileScreenModel(
                 profileId = 13,
                 profileImageVector = Icons.Filled.PrivacyTip,
-                profileText = "Privacy policy"
+                profileText = R.string.privacy_policy
             ),
             ProfileScreenModel(
                 profileId = 14,
                 profileImageVector = Icons.Filled.ControlPointDuplicate,
-                profileText = "Terms of service"
+                profileText = R.string.terms_of_service
             )
         )
     }
