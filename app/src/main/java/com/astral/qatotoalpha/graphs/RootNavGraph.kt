@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.astral.qatotoalpha.feature.firsttime.presentation.FirstScreen
 import com.astral.qatotoalpha.feature.navbar.presentation.MainScreen
-import com.astral.qatotoalpha.util.FirstTimeScreen
+import com.astral.qatotoalpha.util.Screen
 
 @Composable
 fun RootNavigationGraph(navController: NavHostController, isContinueAccepted: Boolean?) {
@@ -14,15 +14,15 @@ fun RootNavigationGraph(navController: NavHostController, isContinueAccepted: Bo
         navController = navController,
         route = Graph.ROOT_GRAPH,
         startDestination = if (isContinueAccepted == false) {
-            FirstTimeScreen.FirstScreen.route
+            Screen.FirstScreen.route
         } else {
-            FirstTimeScreen.MainScreen.route
+            Screen.MainScreen.route
         }
     ) {
-        composable(route = FirstTimeScreen.FirstScreen.route) {
+        composable(route = Screen.FirstScreen.route) {
             FirstScreen(navController = navController)
         }
-        composable(route = FirstTimeScreen.MainScreen.route) {
+        composable(route = Screen.MainScreen.route) {
             MainScreen()
         }
     }

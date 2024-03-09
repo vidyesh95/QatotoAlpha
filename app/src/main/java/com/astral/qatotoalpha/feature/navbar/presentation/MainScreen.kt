@@ -1,7 +1,6 @@
 package com.astral.qatotoalpha.feature.navbar.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,15 +16,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.astral.qatotoalpha.feature.anime.presentation.AnimeScreen
-import com.astral.qatotoalpha.feature.create.presentaion.CreateScreen
-import com.astral.qatotoalpha.feature.home.presentation.HomeScreen
-import com.astral.qatotoalpha.feature.shorts.presentation.ShortsScreen
-import com.astral.qatotoalpha.feature.store.presentation.StoreScreen
+import com.astral.qatotoalpha.graphs.MainNavigationGraph
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.NavigationBarScreen
 
@@ -99,27 +92,7 @@ fun MainPage() {
                     }
                 }
             ) { innerPadding ->
-                NavHost(
-                    navController = navController,
-                    startDestination = NavigationBarScreen.HomeScreen.route,
-                    modifier = Modifier.padding(innerPadding)
-                ) {
-                    composable(route = NavigationBarScreen.HomeScreen.route) {
-                        HomeScreen()
-                    }
-                    composable(route = NavigationBarScreen.AnimeScreen.route) {
-                        AnimeScreen()
-                    }
-                    composable(route = NavigationBarScreen.CreateScreen.route) {
-                        CreateScreen()
-                    }
-                    composable(route = NavigationBarScreen.StoreScreen.route) {
-                        StoreScreen()
-                    }
-                    composable(route = NavigationBarScreen.ShortsScreen.route) {
-                        ShortsScreen()
-                    }
-                }
+                MainNavigationGraph(navController = navController, innerPadding = innerPadding)
             }
         }
     }
