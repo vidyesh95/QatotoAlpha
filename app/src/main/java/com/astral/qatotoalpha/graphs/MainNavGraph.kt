@@ -34,7 +34,7 @@ fun MainNavigationGraph(navController: NavHostController, innerPadding: PaddingV
         composable(route = NavigationBarScreen.StoreScreen.route) {
             StoreScreen()
         }
-        composable(route = NavigationBarScreen.AnimeScreen.route) {
+        composable(route = NavigationBarScreen.ShortsScreen.route) {
             ShortsScreen()
         }
     }
