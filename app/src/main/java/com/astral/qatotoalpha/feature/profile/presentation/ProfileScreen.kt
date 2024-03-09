@@ -74,7 +74,11 @@ fun ProfilePage() {
                             )
                         },
                         navigationIcon = {
-                            IconButton(onClick = { /*TODO*/ }) {
+                            IconButton(
+                                onClick = {
+                                    /*TODO*/
+                                }
+                            ) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                     contentDescription = "Back"
@@ -94,7 +98,9 @@ fun ProfilePage() {
 @Composable
 fun ProfileCard() {
     Card(
-        onClick = { /*TODO*/ },
+        onClick = {
+            //navController.navigate(Screen.LoginScreen.route)
+        },
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()

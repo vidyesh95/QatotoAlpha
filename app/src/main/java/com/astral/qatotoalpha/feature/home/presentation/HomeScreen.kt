@@ -108,6 +108,7 @@ fun HomePage() {
                     }
                     IconButton(
                         onClick = {
+                            //navController.navigate(Screen.ProfileScreen.route)
                             viewModel.onTintColorChanged()
                         }
                     ) {
