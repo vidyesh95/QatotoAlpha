@@ -45,12 +45,12 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="$USER_HOME$/.android/avd/Small_Phone_API_34.avd" />
+                  <value value="$USER_HOME$/.android/avd/Pixel_8_API_34.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-03-08T07:44:26.637571Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-03-09T15:06:30.524692Z" />
         </State>
       </entry>
       <entry key="RegisterScreenPreview">
