@@ -51,17 +51,20 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
+import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun ForgotPassScreen() {
-    ForgotPassPage()
+fun ForgotPassScreen(navController: NavController) {
+    ForgotPassPage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ForgotPassPage() {
+fun ForgotPassPage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -91,14 +94,14 @@ fun ForgotPassPage() {
                     )
                 }
             ) { innerPadding ->
-                ForgotPassScreenContent(innerPadding)
+                ForgotPassScreenContent(innerPadding = innerPadding, navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun ForgotPassScreenContent(innerPadding: PaddingValues) {
+fun ForgotPassScreenContent(innerPadding: PaddingValues, navController: NavController) {
     // Handle or Email text field
     var emailHandleText by remember { mutableStateOf("") }
 
@@ -241,7 +244,7 @@ fun ForgotPassScreenContent(innerPadding: PaddingValues) {
                 .clip(shape = CircleShape)
                 .clickable(
                     onClick = {
-                        //navController.navigate(Screen.RegisterScreen.route)
+                        navController.navigate(Screen.RegisterScreen.route)
                     }
                 )
                 .padding(all = 12.dp),
@@ -274,5 +277,6 @@ fun ForgotPassScreenContent(innerPadding: PaddingValues) {
 @PreviewLightDark
 @Composable
 fun ForgotPassScreenPreview() {
-    ForgotPassPage()
+    val navController = rememberNavController()
+    ForgotPassPage(navController = navController)
 }

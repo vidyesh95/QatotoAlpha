@@ -1,9 +1,9 @@
 package com.astral.qatotoalpha.graphs
 
-import androidx.compose.runtime.Composable
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import com.astral.qatotoalpha.feature.auth.presentation.forgotpass.ForgotPassScreen
 import com.astral.qatotoalpha.feature.auth.presentation.login.LoginScreen
 import com.astral.qatotoalpha.feature.auth.presentation.loginwithpass.LoginWithPassScreen
@@ -12,27 +12,25 @@ import com.astral.qatotoalpha.feature.auth.presentation.register.RegisterScreen
 import com.astral.qatotoalpha.util.Screen
 
 
-@Composable
-fun AuthNavigationGraph(navController: NavHostController) {
-    NavHost(
-        navController = navController,
+fun NavGraphBuilder.authNavigationGraph(navController: NavHostController) {
+    navigation(
         route = Graph.AUTH_GRAPH,
         startDestination = Screen.LoginScreen.route
     ) {
         composable(route = Screen.LoginScreen.route) {
-            LoginScreen()
+            LoginScreen(navController = navController)
         }
         composable(route = Screen.LoginWithPassScreen.route) {
-            LoginWithPassScreen()
+            LoginWithPassScreen(navController = navController)
         }
         composable(route = Screen.ForgotPassScreen.route) {
-            ForgotPassScreen()
+            ForgotPassScreen(navController = navController)
         }
         composable(route = Screen.NewPassScreen.route) {
-            NewPassScreen()
+            NewPassScreen(navController = navController)
         }
         composable(route = Screen.RegisterScreen.route) {
-            RegisterScreen()
+            RegisterScreen(navController = navController)
         }
     }
 }

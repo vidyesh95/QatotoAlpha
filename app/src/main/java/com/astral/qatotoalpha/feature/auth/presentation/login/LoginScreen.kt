@@ -40,17 +40,20 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
+import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun LoginScreen() {
-    LoginPage()
+fun LoginScreen(navController: NavController) {
+    LoginPage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage() {
+fun LoginPage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -77,14 +80,14 @@ fun LoginPage() {
                     )
                 }
             ) { innerPadding ->
-                LoginScreenContent(innerPadding)
+                LoginScreenContent(innerPadding = innerPadding, navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun LoginScreenContent(innerPadding: PaddingValues) {
+fun LoginScreenContent(innerPadding: PaddingValues, navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -202,7 +205,7 @@ fun LoginScreenContent(innerPadding: PaddingValues) {
                 .clip(shape = CircleShape)
                 .clickable(
                     onClick = {
-                        //navController.navigate(Screen.RegisterScreen.route)
+                        navController.navigate(Screen.RegisterScreen.route)
                     }
                 )
                 .padding(all = 12.dp),
@@ -228,5 +231,6 @@ fun LoginScreenContent(innerPadding: PaddingValues) {
 @PreviewLightDark
 @Composable
 fun LoginScreenPreview() {
-    LoginPage()
+    val navController = rememberNavController()
+    LoginPage(navController = navController)
 }

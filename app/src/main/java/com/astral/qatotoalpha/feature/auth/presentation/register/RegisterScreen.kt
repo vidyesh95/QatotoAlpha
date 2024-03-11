@@ -60,17 +60,20 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
+import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun RegisterScreen() {
-    RegisterPage()
+fun RegisterScreen(navController: NavController) {
+    RegisterPage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterPage() {
+fun RegisterPage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -100,14 +103,14 @@ fun RegisterPage() {
                     )
                 }
             ) { innerPadding ->
-                RegisterScreenContent(innerPadding)
+                RegisterScreenContent(innerPadding = innerPadding, navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun RegisterScreenContent(innerPadding: PaddingValues) {
+fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavController) {
     // Handle or Email text field
     var registerEmailHandleText by remember { mutableStateOf("") }
 
@@ -378,7 +381,7 @@ fun RegisterScreenContent(innerPadding: PaddingValues) {
                 .clip(shape = CircleShape)
                 .clickable(
                     onClick = {
-                        //navController.navigate(Screen.LoginWithPassScreen.route)
+                        navController.navigate(Screen.LoginWithPassScreen.route)
                     }
                 )
                 .padding(all = 12.dp),
@@ -411,7 +414,6 @@ fun RegisterScreenContent(innerPadding: PaddingValues) {
 @PreviewLightDark
 @Composable
 fun RegisterScreenPreview() {
-    QatotoAlphaTheme {
-        RegisterScreen()
-    }
+    val navController = rememberNavController()
+    RegisterScreen(navController = navController)
 }

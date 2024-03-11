@@ -61,17 +61,20 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
+import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun LoginWithPassScreen() {
-    LoginWithPassPage()
+fun LoginWithPassScreen(navController: NavController) {
+    LoginWithPassPage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginWithPassPage() {
+fun LoginWithPassPage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -90,7 +93,13 @@ fun LoginWithPassPage() {
                             )
                         },
                         navigationIcon = {
-                            IconButton(onClick = { /*TODO*/ }) {
+                            IconButton(
+                                onClick = {
+                                    if (navController.currentBackStackEntry?.destination?.route == Screen.LoginWithPassScreen.route) {
+                                        navController.popBackStack()
+                                    }
+                                }
+                            ) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                     contentDescription = "Back"
@@ -101,14 +110,17 @@ fun LoginWithPassPage() {
                     )
                 }
             ) { innerPadding ->
-                LoginWithPassScreenContent(innerPadding)
+                LoginWithPassScreenContent(
+                    innerPadding = innerPadding,
+                    navController = navController
+                )
             }
         }
     }
 }
 
 @Composable
-fun LoginWithPassScreenContent(innerPadding: PaddingValues) {
+fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavController) {
     // Handle or Email text field
     var emailHandleText by remember { mutableStateOf("") }
 
@@ -270,7 +282,7 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues) {
                 .clip(shape = CircleShape)
                 .clickable(
                     onClick = {
-                        //navController.navigate(Screen.ForgotPassScreen.route)
+                        navController.navigate(Screen.ForgotPassScreen.route)
                     }
                 )
                 .padding(vertical = 12.dp),
@@ -354,7 +366,7 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues) {
                 .clip(shape = CircleShape)
                 .clickable(
                     onClick = {
-                        //navController.navigate(Screen.RegisterScreen.route)
+                        navController.navigate(Screen.RegisterScreen.route)
                     }
                 )
                 .padding(all = 12.dp),
@@ -387,5 +399,6 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues) {
 @PreviewLightDark
 @Composable
 fun LoginWithPassScreenPreview() {
-    LoginWithPassPage()
+    val navController = rememberNavController()
+    LoginWithPassPage(navController = navController)
 }

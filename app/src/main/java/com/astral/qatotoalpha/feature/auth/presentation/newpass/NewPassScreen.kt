@@ -60,17 +60,20 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
+import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun NewPassScreen() {
-    NewPassPage()
+fun NewPassScreen(navController: NavController) {
+    NewPassPage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewPassPage() {
+fun NewPassPage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -100,14 +103,14 @@ fun NewPassPage() {
                     )
                 }
             ) { innerPadding ->
-                NewPassScreenContent(innerPadding)
+                NewPassScreenContent(innerPadding = innerPadding, navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun NewPassScreenContent(innerPadding: PaddingValues) {
+fun NewPassScreenContent(innerPadding: PaddingValues, navController: NavController) {
 
     // New Password text field
     var newPasswordText by remember { mutableStateOf("") }
@@ -344,7 +347,7 @@ fun NewPassScreenContent(innerPadding: PaddingValues) {
                 .clip(shape = CircleShape)
                 .clickable(
                     onClick = {
-                        //navController.navigate(Screen.RegisterScreen.route)
+                        navController.navigate(Screen.RegisterScreen.route)
                     }
                 )
                 .padding(all = 12.dp),
@@ -377,5 +380,6 @@ fun NewPassScreenContent(innerPadding: PaddingValues) {
 @PreviewLightDark
 @Composable
 fun NewPassScreenPreview() {
-    NewPassPage()
+    val navController = rememberNavController()
+    NewPassPage(navController = navController)
 }
