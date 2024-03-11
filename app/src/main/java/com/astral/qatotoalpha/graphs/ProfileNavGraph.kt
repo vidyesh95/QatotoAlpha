@@ -15,5 +15,20 @@ fun NavGraphBuilder.profileNavigationGraph(navController: NavHostController) {
         composable(route = Screen.ProfileScreen.route) {
             ProfileScreen()
         }
+        authNavigationGraph(navController = navController)
     }
 }
+/*
+@Composable
+fun ProfileNavigationGraph(navController: NavHostController) {
+    NavHost(
+        navController = navController,
+        route = Graph.PROFILE_GRAPH,
+        startDestination = Screen.ProfileScreen.route
+    ) {
+        composable(route = Screen.ProfileScreen.route) {
+            ProfileScreen()
+        }
+        authNavigationGraph(navController = navController)
+    }
+}*/

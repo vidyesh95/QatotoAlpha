@@ -23,7 +23,7 @@ fun MainNavigationGraph(navController: NavHostController, innerPadding: PaddingV
         modifier = Modifier.padding(innerPadding)
     ) {
         composable(route = NavigationBarScreen.HomeScreen.route) {
-            HomeScreen()
+            HomeScreen(navController = navController)
         }
         composable(route = NavigationBarScreen.AnimeScreen.route) {
             AnimeScreen()
@@ -37,5 +37,6 @@ fun MainNavigationGraph(navController: NavHostController, innerPadding: PaddingV
         composable(route = NavigationBarScreen.ShortsScreen.route) {
             ShortsScreen()
         }
+        profileNavigationGraph(navController = navController)
     }
 }

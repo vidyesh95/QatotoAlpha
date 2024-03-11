@@ -50,20 +50,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.feature.home.data.repository.VideoRepository
 import com.astral.qatotoalpha.feature.home.domain.model.VideoModel
 import com.astral.qatotoalpha.feature.shorts.data.repository.ShortsRepository
 import com.astral.qatotoalpha.feature.shorts.domain.model.ShortsModel
+import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
 
 @Composable
-fun HomeScreen() {
-    HomePage()
+fun HomeScreen(navController: NavController) {
+    HomePage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePage() {
+fun HomePage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     /*val viewModel = viewModel<HomeScreenViewModel>(
@@ -105,8 +108,9 @@ fun HomePage() {
                     }
                     IconButton(
                         onClick = {
+                            //ProfileNavigationGraph(navController = navController)
                             //navController.navigate(Screen.ProfileScreen.route)
-                            //navController.navigate(Graph.PROFILE_GRAPH)
+                            navController.navigate(Graph.PROFILE_GRAPH)
                             //viewModel.onTintColorChanged()
                         }
                     ) {
@@ -592,5 +596,6 @@ fun VideoContainerLive(videoModel: VideoModel) {
 )
 @Composable
 fun HomeScreenPreview() {
-    HomePage()
+    val navController = rememberNavController()
+    HomePage(navController = navController)
 }
