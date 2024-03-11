@@ -72,7 +72,7 @@ fun LoginPage(navController: NavController) {
                             )
                         },
                         navigationIcon = {
-                            IconButton(onClick = { /*TODO*/ }) {
+                            IconButton(onClick = { navController.popBackStack() }) {
                                 Icon(imageVector = Icons.Filled.Close, contentDescription = "Close")
                             }
                         },
@@ -180,7 +180,7 @@ fun LoginScreenContent(innerPadding: PaddingValues, navController: NavController
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
             onClick = {
-                //navController.navigate(Screen.LoginWithPassScreen.route)
+                navController.navigate(Screen.LoginWithPassScreen.route)
             }
         ) {
             Row(

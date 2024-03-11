@@ -83,7 +83,13 @@ fun ForgotPassPage(navController: NavController) {
                             )
                         },
                         navigationIcon = {
-                            IconButton(onClick = { /*TODO*/ }) {
+                            IconButton(
+                                onClick = {
+                                    if (navController.currentBackStackEntry?.destination?.route == Screen.ForgotPassScreen.route) {
+                                        navController.popBackStack()
+                                    }
+                                }
+                            ) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                     contentDescription = "Back"

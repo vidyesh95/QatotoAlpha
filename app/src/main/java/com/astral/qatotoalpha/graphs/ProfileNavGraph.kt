@@ -13,7 +13,7 @@ fun NavGraphBuilder.profileNavigationGraph(navController: NavHostController) {
         startDestination = Screen.ProfileScreen.route
     ) {
         composable(route = Screen.ProfileScreen.route) {
-            ProfileScreen()
+            ProfileScreen(navController = navController)
         }
         authNavigationGraph(navController = navController)
     }

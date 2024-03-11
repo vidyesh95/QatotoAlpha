@@ -63,6 +63,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.Screen
 
@@ -92,7 +93,7 @@ fun NewPassPage(navController: NavController) {
                             )
                         },
                         navigationIcon = {
-                            IconButton(onClick = { /*TODO*/ }) {
+                            IconButton(onClick = { navController.popBackStack() }) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                     contentDescription = "Back"
@@ -255,7 +256,11 @@ fun NewPassScreenContent(innerPadding: PaddingValues, navController: NavControll
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            onClick = { /*TODO*/ }
+            onClick = {
+                navController.navigate(Graph.MAIN_GRAPH) {
+                    popUpTo(Graph.MAIN_GRAPH) { inclusive = true }
+                }
+            }
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,

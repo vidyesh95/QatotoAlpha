@@ -43,19 +43,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.feature.profile.data.ProfileScreenRepository
 import com.astral.qatotoalpha.feature.profile.domain.ProfileScreenModel
+import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 
 @Composable
-fun ProfileScreen() {
-    ProfilePage()
+fun ProfileScreen(navController: NavController) {
+    ProfilePage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfilePage() {
+fun ProfilePage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -76,7 +79,7 @@ fun ProfilePage() {
                         navigationIcon = {
                             IconButton(
                                 onClick = {
-                                    /*TODO*/
+                                    navController.popBackStack()
                                 }
                             ) {
                                 Icon(
@@ -89,17 +92,17 @@ fun ProfilePage() {
                     )
                 }
             ) { innerPadding ->
-                ProfileScreenContent(innerPadding)
+                ProfileScreenContent(innerPadding = innerPadding, navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun ProfileCard() {
+fun ProfileCard(navController: NavController) {
     Card(
         onClick = {
-            //navController.navigate(Screen.LoginScreen.route)
+            navController.navigate(Graph.AUTH_GRAPH)
         },
         modifier = Modifier
             .fillMaxWidth()
@@ -308,7 +311,7 @@ fun ProfileItem(item: ProfileScreenModel) {
 }
 
 @Composable
-fun ProfileScreenContent(innerPadding: PaddingValues) {
+fun ProfileScreenContent(innerPadding: PaddingValues, navController: NavController) {
     val profileScreenRepository = ProfileScreenRepository()
     val profileScreenData = profileScreenRepository.getAllData()
     LazyColumn(
@@ -324,7 +327,7 @@ fun ProfileScreenContent(innerPadding: PaddingValues) {
             },
             itemContent = { index, item: ProfileScreenModel ->
                 if (index == 0) {
-                    ProfileCard()
+                    ProfileCard(navController = navController)
                 }
                 ProfileItem(item = item)
             }
@@ -337,5 +340,6 @@ fun ProfileScreenContent(innerPadding: PaddingValues) {
 @PreviewLightDark
 @Composable
 fun ProfileScreenPreview() {
-    ProfilePage()
+    val navController = rememberNavController()
+    ProfilePage(navController = navController)
 }
