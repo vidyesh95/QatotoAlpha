@@ -50,9 +50,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.astral.qatotoalpha.feature.home.data.repository.VideoRepository
 import com.astral.qatotoalpha.feature.home.domain.model.VideoModel
 import com.astral.qatotoalpha.feature.shorts.data.repository.ShortsRepository
@@ -69,7 +66,7 @@ fun HomeScreen() {
 fun HomePage() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
-    val viewModel = viewModel<HomeScreenViewModel>(
+    /*val viewModel = viewModel<HomeScreenViewModel>(
         factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return HomeScreenViewModel(
@@ -77,7 +74,7 @@ fun HomePage() {
                 ) as T
             }
         }
-    )
+    )*/
 
     Scaffold(
         modifier = Modifier
@@ -110,13 +107,13 @@ fun HomePage() {
                         onClick = {
                             //navController.navigate(Screen.ProfileScreen.route)
                             //navController.navigate(Graph.PROFILE_GRAPH)
-                            viewModel.onTintColorChanged()
+                            //viewModel.onTintColorChanged()
                         }
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.AccountCircle,
                             contentDescription = "Account",
-                            tint = viewModel.tintColor
+                            //tint = viewModel.tintColor
                             //tint = MaterialTheme.colorScheme.primary
                         )
                     }
