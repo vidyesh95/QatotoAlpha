@@ -50,6 +50,7 @@ import com.astral.qatotoalpha.feature.profile.data.ProfileScreenRepository
 import com.astral.qatotoalpha.feature.profile.domain.ProfileScreenModel
 import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
+import com.astral.qatotoalpha.util.Screen
 
 @Composable
 fun ProfileScreen(navController: NavController) {
@@ -79,7 +80,9 @@ fun ProfilePage(navController: NavController) {
                         navigationIcon = {
                             IconButton(
                                 onClick = {
-                                    navController.popBackStack()
+                                    if (navController.currentBackStackEntry?.destination?.route == Screen.ProfileScreen.route) {
+                                        navController.popBackStack()
+                                    }
                                 }
                             ) {
                                 Icon(
@@ -107,7 +110,7 @@ fun ProfileCard(navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(start = 16.dp, top = 0.dp, end = 16.dp, bottom = 16.dp),
+            .padding(all = 16.dp),
         shape = MaterialTheme.shapes.medium
     ) {
         Column(

@@ -9,13 +9,13 @@ import androidx.compose.material.icons.filled.Feedback
 import androidx.compose.material.icons.filled.Forum
 import androidx.compose.material.icons.filled.InvertColors
 import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.ModeNight
 import androidx.compose.material.icons.filled.ModeOfTravel
 import androidx.compose.material.icons.filled.NoAccounts
 import androidx.compose.material.icons.filled.PrivacyTip
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.StarRate
-import androidx.compose.material.icons.filled.Storage
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.feature.profile.domain.ProfileScreenModel
 
@@ -45,7 +45,7 @@ class ProfileScreenRepository {
             ProfileScreenModel(
                 profileId = 4,
                 profileImageVector = Icons.Filled.Settings,
-                profileText = R.string.settings
+                profileText = R.string.account_settings
             ),
             ProfileScreenModel(
                 profileId = 5,
@@ -59,13 +59,13 @@ class ProfileScreenRepository {
             ),
             ProfileScreenModel(
                 profileId = 7,
-                profileImageVector = Icons.Filled.BarChart,
-                profileText = R.string.time_watched
+                profileImageVector = Icons.Filled.LocationOn,
+                profileText = R.string.location
             ),
             ProfileScreenModel(
                 profileId = 8,
-                profileImageVector = Icons.Filled.Storage,
-                profileText = R.string.your_data_in_app_account
+                profileImageVector = Icons.Filled.BarChart,
+                profileText = R.string.time_watched
             ),
             ProfileScreenModel(
                 profileId = 9,
