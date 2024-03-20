@@ -98,6 +98,7 @@ fun LoginScreenContent(innerPadding: PaddingValues, navController: NavController
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Continue with Google button
         OutlinedIconButton(
             modifier = Modifier
                 .fillMaxWidth()
