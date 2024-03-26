@@ -6,6 +6,9 @@
     <string name="continue_text_4">privacy policy</string>
     <string name="continue_text">Continue</string>
     <string name="or_text">or</string>
+    <string name="your_cart">Your cart</string>
+    <string name="your_orders">Your orders</string>
+    <string name="your_wishlist">Your wishlist</string>
     <string name="night_light">Night light</string>
     <string name="app_theme">App theme</string>
     <string name="turn_on_incognito">Turn on incognito</string>

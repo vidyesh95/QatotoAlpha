@@ -71,7 +71,8 @@ fun CreatePage() {
             }
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(
-                    imageVector = Icons.Outlined.Search, contentDescription = "Search"
+                    imageVector = Icons.Outlined.Search,
+                    contentDescription = "Search"
                 )
             }
             IconButton(onClick = { /*TODO*/ }) {
@@ -119,7 +120,8 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
                 contentDescription = "Upload Video"
             )
             Text(
-                text = "Upload Video", style = MaterialTheme.typography.labelLarge
+                text = "Upload Video",
+                style = MaterialTheme.typography.labelLarge
             )
         }
         Row(
@@ -136,7 +138,8 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
                 contentDescription = "Create Store Listing"
             )
             Text(
-                text = "Create Store Listing", style = MaterialTheme.typography.labelLarge
+                text = "Create Store Listing",
+                style = MaterialTheme.typography.labelLarge
             )
         }
         Row(
@@ -153,7 +156,8 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
                 contentDescription = "Go Live"
             )
             Text(
-                text = "Go Live", style = MaterialTheme.typography.labelLarge
+                text = "Go Live",
+                style = MaterialTheme.typography.labelLarge
             )
         }
         Row(
@@ -170,7 +174,8 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
                 contentDescription = "Create Short"
             )
             Text(
-                text = "Create Short", style = MaterialTheme.typography.labelLarge
+                text = "Create Short",
+                style = MaterialTheme.typography.labelLarge
             )
         }
         Row(
@@ -187,7 +192,8 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
                 contentDescription = "Live Wars"
             )
             Text(
-                text = "Live Wars", style = MaterialTheme.typography.labelLarge
+                text = "Live Wars",
+                style = MaterialTheme.typography.labelLarge
             )
         }
         Row(
@@ -204,7 +210,8 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
                 contentDescription = "Create a Short"
             )
             Text(
-                text = "Create Community Post", style = MaterialTheme.typography.labelLarge
+                text = "Create Community Post",
+                style = MaterialTheme.typography.labelLarge
             )
         }
     }
