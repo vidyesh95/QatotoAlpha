@@ -280,7 +280,13 @@ fun ProfileItem(item: ProfileScreenModel, navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable(onClick = { navController.navigate(Screen.AccountSettingsScreen.route) })
+            .clickable(
+                onClick = {
+                    if (item.profileId == 7) {
+                        navController.navigate(Screen.AccountSettingsScreen.route)
+                    }
+                }
+            )
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
