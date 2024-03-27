@@ -35,4 +35,10 @@
     <string name="set_recovery_email_address">Set recovery email address</string>
     <string name="link_google_account">Link Google account</string>
     <string name="link_apple_account">Link Apple account</string>
+    <string name="upload_video">Upload video</string>
+    <string name="create_store_listing">Create Store Listing</string>
+    <string name="go_live">Go Live</string>
+    <string name="create_short">Create Short</string>
+    <string name="live_wars">Live Wars</string>
+    <string name="create_a_short">Create a Short</string>
 </resources>

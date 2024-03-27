@@ -2,6 +2,7 @@ package com.astral.qatotoalpha.feature.create.presentaion
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.AddBusiness
 import androidx.compose.material.icons.outlined.FileUpload
@@ -37,7 +39,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -113,108 +118,204 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(all = 16.dp),
+                .clickable(onClick = { /*TODO*/ })
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Icon(
                 modifier = Modifier.size(24.dp),
                 imageVector = Icons.Outlined.FileUpload,
-                contentDescription = "Upload Video"
+                contentDescription = stringResource(id = R.string.upload_video)
             )
             Text(
-                text = "Upload Video",
-                style = MaterialTheme.typography.labelLarge
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .weight(1f),
+                text = stringResource(id = R.string.upload_video),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+                softWrap = true,
+                overflow = TextOverflow.Ellipsis
+            )
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = stringResource(id = R.string.upload_video),
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(all = 16.dp),
+                .clickable(onClick = { /*TODO*/ })
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Icon(
                 modifier = Modifier.size(24.dp),
                 imageVector = Icons.Outlined.AddBusiness,
-                contentDescription = "Create Store Listing"
+                contentDescription = stringResource(id = R.string.create_store_listing)
             )
             Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .weight(1f),
                 text = "Create Store Listing",
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+                softWrap = true,
+                overflow = TextOverflow.Ellipsis
+            )
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = stringResource(id = R.string.create_store_listing),
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(all = 16.dp),
+                .clickable(onClick = { /*TODO*/ })
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Icon(
                 modifier = Modifier.size(24.dp),
                 imageVector = Icons.Outlined.Stream,
-                contentDescription = "Go Live"
+                contentDescription = stringResource(id = R.string.go_live)
             )
             Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .weight(1f),
                 text = "Go Live",
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+                softWrap = true,
+                overflow = TextOverflow.Ellipsis
+            )
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = stringResource(id = R.string.go_live),
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(all = 16.dp),
+                .clickable(onClick = { /*TODO*/ })
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Icon(
                 modifier = Modifier.size(24.dp),
                 imageVector = Icons.Outlined.VideoCall,
-                contentDescription = "Create Short"
+                contentDescription = stringResource(id = R.string.create_short)
             )
             Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .weight(1f),
                 text = "Create Short",
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+                softWrap = true,
+                overflow = TextOverflow.Ellipsis
+            )
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = stringResource(id = R.string.create_short),
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(all = 16.dp),
+                .clickable(onClick = { /*TODO*/ })
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Icon(
                 modifier = Modifier.size(24.dp),
                 painter = painterResource(id = R.drawable.outline_swords_24),
-                contentDescription = "Live Wars"
+                contentDescription = stringResource(id = R.string.live_wars)
             )
             Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .weight(1f),
                 text = "Live Wars",
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+                softWrap = true,
+                overflow = TextOverflow.Ellipsis
+            )
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = stringResource(id = R.string.live_wars),
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(all = 16.dp),
+                .clickable(onClick = { /*TODO*/ })
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Icon(
                 modifier = Modifier.size(24.dp),
                 imageVector = Icons.Outlined.PostAdd,
-                contentDescription = "Create a Short"
+                contentDescription = stringResource(id = R.string.create_a_short)
             )
             Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .weight(1f),
                 text = "Create Community Post",
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+                softWrap = true,
+                overflow = TextOverflow.Ellipsis
+            )
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = stringResource(id = R.string.create_a_short),
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
     }
