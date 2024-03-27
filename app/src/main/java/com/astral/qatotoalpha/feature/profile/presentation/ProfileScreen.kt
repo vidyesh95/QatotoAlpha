@@ -275,12 +275,12 @@ fun ProfileCard(navController: NavController) {
 }
 
 @Composable
-fun ProfileItem(item: ProfileScreenModel) {
+fun ProfileItem(item: ProfileScreenModel, navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable(onClick = { /*TODO*/ })
+            .clickable(onClick = { navController.navigate(Screen.AccountSettingsScreen.route) })
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -332,7 +332,7 @@ fun ProfileScreenContent(innerPadding: PaddingValues, navController: NavControll
                 if (index == 0) {
                     ProfileCard(navController = navController)
                 }
-                ProfileItem(item = item)
+                ProfileItem(item = item, navController = navController)
             }
         )
     }

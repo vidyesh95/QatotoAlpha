@@ -24,5 +24,15 @@
     <string name="help_center">Help center</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="terms_of_service">Terms of service</string>
+    <string name="switch_account">Switch account</string>
+    <string name="sign_out">Sign out</string>
     <string name="your_data_in_app_account">Your data in app account</string>
+    <string name="set_password">Set password</string>
+    <string name="set_handle">Set handle</string>
+    <string name="set_phone_number">Set phone number</string>
+    <string name="set_profile_photo">Set profile photo</string>
+    <string name="set_email_address">Set email address</string>
+    <string name="set_recovery_email_address">Set recovery email address</string>
+    <string name="link_google_account">Link Google account</string>
+    <string name="link_apple_account">Link Apple account</string>
 </resources>
