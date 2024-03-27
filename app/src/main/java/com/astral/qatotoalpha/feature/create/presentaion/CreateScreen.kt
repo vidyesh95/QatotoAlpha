@@ -296,14 +296,14 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
             Icon(
                 modifier = Modifier.size(24.dp),
                 imageVector = Icons.Outlined.PostAdd,
-                contentDescription = stringResource(id = R.string.create_a_short)
+                contentDescription = stringResource(id = R.string.create_community_post)
             )
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .weight(1f),
-                text = "Create Community Post",
+                text = stringResource(id = R.string.create_community_post),
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Start,
@@ -314,7 +314,7 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
             Icon(
                 modifier = Modifier.size(24.dp),
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = stringResource(id = R.string.create_a_short),
+                contentDescription = stringResource(id = R.string.create_community_post),
                 tint = MaterialTheme.colorScheme.onBackground
             )
         }
