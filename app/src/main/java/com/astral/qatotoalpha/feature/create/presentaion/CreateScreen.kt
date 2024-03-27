@@ -40,17 +40,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
 
 @Composable
-fun CreateScreen() {
-    CreatePage()
+fun CreateScreen(navController: NavController) {
+    CreatePage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreatePage() {
+fun CreatePage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(modifier = Modifier
         .fillMaxSize()
@@ -75,7 +78,7 @@ fun CreatePage() {
                     contentDescription = "Search"
                 )
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate(Graph.PROFILE_GRAPH) }) {
                 Icon(
                     imageVector = Icons.Outlined.AccountCircle,
                     contentDescription = "Account"
@@ -235,5 +238,6 @@ fun CreateScreenContent(innerPadding: PaddingValues) {
 )
 @Composable
 fun CreateScreenPreview() {
-    CreateScreenContent(innerPadding = PaddingValues(0.dp))
+    val navController = rememberNavController()
+    CreatePage(navController = navController)
 }

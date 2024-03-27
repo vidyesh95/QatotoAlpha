@@ -51,6 +51,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.feature.store.data.repository.ProductRepository
 import com.astral.qatotoalpha.feature.store.data.repository.StorePathwayRepository
@@ -58,16 +60,17 @@ import com.astral.qatotoalpha.feature.store.data.repository.StoreScreenRepositor
 import com.astral.qatotoalpha.feature.store.domain.model.ProductModel
 import com.astral.qatotoalpha.feature.store.domain.model.StorePathwayModel
 import com.astral.qatotoalpha.feature.store.domain.model.StoreScreenModel
+import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
 
 @Composable
-fun StoreScreen() {
-    StorePage()
+fun StoreScreen(navController: NavController) {
+    StorePage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StorePage() {
+fun StorePage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(
         modifier = Modifier
@@ -96,7 +99,7 @@ fun StorePage() {
                             contentDescription = "Shopping Cart"
                         )
                     }
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.navigate(Graph.PROFILE_GRAPH) }) {
                         Icon(
                             imageVector = Icons.Outlined.AccountCircle,
                             contentDescription = "Account"
@@ -756,7 +759,6 @@ fun BusinessCards() {
 @PreviewDynamicColors*/
 @Composable
 fun StoreScreenPreview() {
-    //StorePage()
-    //Categories()
-    Pathways()
+    val navController = rememberNavController()
+    StorePage(navController = navController)
 }

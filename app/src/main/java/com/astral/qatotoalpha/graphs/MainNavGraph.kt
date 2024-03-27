@@ -26,13 +26,13 @@ fun MainNavigationGraph(navController: NavHostController, innerPadding: PaddingV
             HomeScreen(navController = navController)
         }
         composable(route = NavigationBarScreen.AnimeScreen.route) {
-            AnimeScreen()
+            AnimeScreen(navController = navController)
         }
         composable(route = NavigationBarScreen.CreateScreen.route) {
-            CreateScreen()
+            CreateScreen(navController = navController)
         }
         composable(route = NavigationBarScreen.StoreScreen.route) {
-            StoreScreen()
+            StoreScreen(navController = navController)
         }
         composable(route = NavigationBarScreen.ShortsScreen.route) {
             ShortsScreen()

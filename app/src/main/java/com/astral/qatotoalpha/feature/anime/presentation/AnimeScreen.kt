@@ -44,26 +44,26 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.PreviewDynamicColors
-import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.feature.anime.data.repository.AnimeRepository
 import com.astral.qatotoalpha.feature.anime.data.repository.AnimeScreenRepository
 import com.astral.qatotoalpha.feature.anime.domain.model.AnimeModel
 import com.astral.qatotoalpha.feature.anime.domain.model.AnimeScreenModel
+import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
 
 @Composable
-fun AnimeScreen() {
-    AnimePage()
+fun AnimeScreen(navController: NavController) {
+    AnimePage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnimePage() {
+fun AnimePage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(
         modifier = Modifier
@@ -92,7 +92,7 @@ fun AnimePage() {
                             contentDescription = "Search"
                         )
                     }
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.navigate(Graph.PROFILE_GRAPH) }) {
                         Icon(
                             imageVector = Icons.Outlined.AccountCircle,
                             contentDescription = "Account"
@@ -263,7 +263,7 @@ fun LazyAnimeRow(item: AnimeScreenModel) {
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 8.dp),
     ) {
         items(
-            items = when(item.rowSort) {
+            items = when (item.rowSort) {
                 "recentEpisodeRank" -> animeData.sortedBy { it.recentEpisodeRank }
                 "recommendedForYouRank" -> animeData.sortedBy { it.recommendedForYouRank }
                 "completedSeriesRank" -> animeData.sortedBy { it.completedSeriesRank }
@@ -349,13 +349,12 @@ fun AnimeScreenContent(innerPadding: PaddingValues) {
     uiMode = Configuration.UI_MODE_NIGHT_NO or Configuration.UI_MODE_TYPE_NORMAL,
     device = "id:pixel_c"
 )*/
-@PreviewScreenSizes
-@PreviewFontScale
+//@PreviewScreenSizes
+//@PreviewFontScale
 @PreviewLightDark
-@PreviewDynamicColors
+//@PreviewDynamicColors
 @Composable
 fun AnimeScreenPreview() {
-    AnimeHero()
-    //IconButtonRow()
-    //LazyAnimeColumnItem()
+    val navController = rememberNavController()
+    AnimePage(navController = navController)
 }
