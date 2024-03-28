@@ -30,64 +30,72 @@ fun MainScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainPage() {
+    val items = listOf(
+        NavigationBarScreen.HomeScreen,
+        NavigationBarScreen.AnimeScreen,
+        NavigationBarScreen.CreateScreen,
+        NavigationBarScreen.StoreScreen,
+        NavigationBarScreen.ShortsScreen
+    )
+    val navController = rememberNavController()
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
+    // Hide the bottom navigation bar when the nav host is not on items destinations
+    val navigationBarDestination = items.any { it.route == currentDestination?.route }
+
     QatotoAlphaTheme {
         // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            val items = listOf(
-                NavigationBarScreen.HomeScreen,
-                NavigationBarScreen.AnimeScreen,
-                NavigationBarScreen.CreateScreen,
-                NavigationBarScreen.StoreScreen,
-                NavigationBarScreen.ShortsScreen
-            )
-            val navController = rememberNavController()
             Scaffold(
                 bottomBar = {
-                    NavigationBar {
-                        val navBackStackEntry by navController.currentBackStackEntryAsState()
-                        val currentDestination = navBackStackEntry?.destination
-                        items.forEach { screen ->
-                            val selected = currentDestination?.hierarchy?.any {
-                                it.route == screen.route
-                            } == true
-                            NavigationBarItem(
-                                icon = {
-                                    BadgedBox(
-                                        badge = {
-                                            if (screen.badgeCount != null && screen.badgeCount > 0) {
-                                                Badge {
-                                                    Text(text = screen.badgeCount.toString())
+                    // Only show the bottom navigation bar on items destinations
+                    if (navigationBarDestination) {
+                        NavigationBar {
+                            items.forEach { screen ->
+                                val selected = currentDestination?.hierarchy?.any {
+                                    it.route == screen.route
+                                } == true
+                                NavigationBarItem(
+                                    icon = {
+                                        BadgedBox(
+                                            badge = {
+                                                if (screen.badgeCount != null && screen.badgeCount > 0) {
+                                                    Badge {
+                                                        Text(text = screen.badgeCount.toString())
+                                                    }
                                                 }
                                             }
+                                        ) {
+                                            Icon(
+                                                imageVector = if (selected) screen.selectedIcon else screen.unselectedIcon,
+                                                contentDescription = screen.title
+                                            )
                                         }
-                                    ) {
-                                        Icon(
-                                            imageVector = if (selected) screen.selectedIcon else screen.unselectedIcon,
-                                            contentDescription = screen.title
-                                        )
-                                    }
-                                },
-                                label = { Text(screen.title) },
-                                selected = selected,
-                                onClick = {
-                                    navController.navigate(screen.route) {
-                                        // Pop up to the start destination of the graph to avoid
-                                        // building up a large stack of destinations on the back stack
-                                        // as users select items
-                                        popUpTo(navController.graph.findStartDestination().id) {
-                                            saveState = true
+                                    },
+                                    label = { Text(screen.title) },
+                                    selected = selected,
+                                    onClick = {
+                                        navController.navigate(screen.route) {
+                                            // Pop up to the start destination of the graph to avoid
+                                            // building up a large stack of destinations on the back stack
+                                            // as users select items
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
+                                            }
+                                            // Avoid multiple copies of the same destination when
+                                            // reselecting the same item
+                                            launchSingleTop = true
+                                            // Restore state when reselecting a previously selected item
+                                            restoreState = true
                                         }
-                                        // Avoid multiple copies of the same destination when
-                                        // reselecting the same item
-                                        launchSingleTop = true
-                                        // Restore state when reselecting a previously selected item
-                                        restoreState = true
                                     }
-                                }
-                            )
+                                )
+                            }
                         }
                     }
                 }
