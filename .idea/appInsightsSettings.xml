@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.astral.qatotoalpha" />
+                  <option name="mobileSdkAppId" value="1:1046263468114:android:8ef0a78082d4f1d2a30f8b" />
+                  <option name="projectId" value="qatotoalpha" />
+                  <option name="projectNumber" value="1046263468114" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

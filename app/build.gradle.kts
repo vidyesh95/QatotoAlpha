@@ -52,7 +52,6 @@ android {
 
 dependencies {
 
-    /*implementation(libs.material3.icons.extended)*/
     /*implementation(libs.androidx.datastore.core)*/
     implementation(libs.core.ktx)
     implementation(libs.core.splashscreen)
@@ -68,6 +67,7 @@ dependencies {
     implementation(libs.generativeai)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
