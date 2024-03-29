@@ -12,6 +12,8 @@ compose-bom = "2024.03.00"
 navigationCompose = "2.7.7"
 generativeai = "0.2.2"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
+google-services = "4.4.1"
+firebase-bom = "32.8.0"
 # material3-icons-extended = "1.2.0-alpha03"
 # datastoreCore = "1.0.0"
 
@@ -34,6 +36,8 @@ material3 = { group = "androidx.compose.material3", name = "material3" }
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 # material3-icons-extended = { group = "androidx.compose.material3", name = "material3-icons-extended", version.ref = "material3-icons-extended" }
 # androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastoreCore" }
 
@@ -41,5 +45,6 @@ generativeai = { group = "com.google.ai.client.generativeai", name = "generative
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 google-android-libraries-mapsplatform-secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "googleAndroidLibrariesMapsplatformSecretsGradlePlugin" }
+com-google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 
 [bundles]

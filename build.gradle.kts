@@ -2,7 +2,7 @@
 plugins {
     alias(libs.plugins.com.android.application) apply false
     alias(libs.plugins.org.jetbrains.kotlin.android) apply false
-    //alias(libs.plugins.com.google.gms.google-services) apply false
+    alias(libs.plugins.com.google.services) apply false
 }
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
