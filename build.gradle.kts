@@ -7,9 +7,3 @@ plugins {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
-tasks.register("cleanInstallDebug") {
-    dependsOn("clean", "installDebug")
-}
-tasks.register("cleanRun") {
-    dependsOn("clean", "run")
-}
