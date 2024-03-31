@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.services)
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -52,7 +53,6 @@ android {
 
 dependencies {
 
-    /*implementation(libs.androidx.datastore.core)*/
     implementation(libs.core.ktx)
     implementation(libs.core.splashscreen)
     implementation(libs.lifecycle.runtime.ktx)
@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
+    implementation(libs.androidx.datastore.core)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.generativeai)
     implementation(platform(libs.firebase.bom))

@@ -14,7 +14,7 @@ generativeai = "0.2.2"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 google-services = "4.4.1"
 firebase-bom = "32.8.0"
-# datastoreCore = "1.0.0"
+datastoreCore = "1.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -38,7 +38,7 @@ generativeai = { group = "com.google.ai.client.generativeai", name = "generative
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
-# androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastoreCore" }
+androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastoreCore" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }
