@@ -69,16 +69,6 @@ fun HomeScreen(navController: NavController) {
 fun HomePage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
-    /*val viewModel = viewModel<HomeScreenViewModel>(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HomeScreenViewModel(
-                    tintCo = "0xFF00FF00"
-                ) as T
-            }
-        }
-    )*/
-
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
