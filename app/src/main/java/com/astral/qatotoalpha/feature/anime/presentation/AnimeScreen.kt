@@ -2,6 +2,7 @@ package com.astral.qatotoalpha.feature.anime.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -116,6 +117,7 @@ fun AnimeHero() {
             .aspectRatio(ratio = 16f / 9f)
             .clip(shape = MaterialTheme.shapes.medium)
             .background(color = Color.Black)
+            .clickable { /*TODO*/ }
     ) {
         Image(
             modifier = Modifier
@@ -140,15 +142,20 @@ fun AnimeHero() {
                     )
                 )
         )
-        Icon(
+        IconButton(
             modifier = Modifier
                 .align(alignment = Alignment.TopEnd)
                 .padding(top = 8.dp, end = 6.dp)
                 .size(24.dp),
-            imageVector = Icons.AutoMirrored.Filled.VolumeOff,
-            contentDescription = "Volume Off",
-            tint = Color.White,
-        )
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.AutoMirrored.Filled.VolumeOff,
+                contentDescription = "Volume Off",
+                tint = Color.White,
+            )
+        }
         Text(
             modifier = Modifier
                 .align(Alignment.BottomStart)
@@ -173,10 +180,15 @@ fun IconButtonRow() {
             .padding(
                 vertical = 8.dp,
                 horizontal = 16.dp
-            )
+            ),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Column(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .weight(1f)
+                .clip(shape = MaterialTheme.shapes.small)
+                .clickable { /*TODO*/ }
+                .padding(all = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
@@ -188,7 +200,11 @@ fun IconButtonRow() {
             Text(text = "Genre", style = MaterialTheme.typography.labelLarge)
         }
         Column(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .weight(1f)
+                .clip(shape = MaterialTheme.shapes.small)
+                .clickable { /*TODO*/ }
+                .padding(all = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
@@ -200,7 +216,11 @@ fun IconButtonRow() {
             Text(text = "Daily", style = MaterialTheme.typography.labelLarge)
         }
         Column(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .weight(1f)
+                .clip(shape = MaterialTheme.shapes.small)
+                .clickable { /*TODO*/ }
+                .padding(all = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
@@ -212,7 +232,11 @@ fun IconButtonRow() {
             Text(text = "Favorite", style = MaterialTheme.typography.labelLarge)
         }
         Column(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .weight(1f)
+                .clip(shape = MaterialTheme.shapes.small)
+                .clickable { /*TODO*/ }
+                .padding(all = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
