@@ -253,7 +253,10 @@ fun IconButtonRow() {
 @Composable
 fun LazyAnimeRowItem(animeModel: AnimeModel) {
     Column(
-        modifier = Modifier.width(width = 158.dp),
+        modifier = Modifier
+            .width(width = 158.dp)
+            .clip(shape = MaterialTheme.shapes.extraSmall)
+            .clickable { /*TODO*/ },
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Image(
@@ -284,7 +287,7 @@ fun LazyAnimeRow(item: AnimeScreenModel) {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 8.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
     ) {
         items(
             items = when (item.rowSort) {
@@ -306,7 +309,12 @@ fun LazyAnimeRow(item: AnimeScreenModel) {
 
 @Composable
 fun LazyAnimeColumnItem(item: AnimeScreenModel) {
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .clickable { /*TODO*/ }
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -335,7 +343,8 @@ fun AnimeScreenContent(innerPadding: PaddingValues) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)
+            .padding(innerPadding),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         itemsIndexed(
             items = animeScreenData,
