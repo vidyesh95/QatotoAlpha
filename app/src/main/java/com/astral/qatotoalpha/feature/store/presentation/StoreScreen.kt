@@ -3,6 +3,7 @@ package com.astral.qatotoalpha.feature.store.presentation
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -120,7 +121,9 @@ fun LazyProductRowItem(product: ProductModel) {
         modifier = Modifier
             .width(width = 140.dp)
             .wrapContentHeight()
-            .clip(shape = MaterialTheme.shapes.small),
+            .clip(shape = MaterialTheme.shapes.medium)
+            .clickable { /*TODO*/ }
+            .padding(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Image(
@@ -155,8 +158,8 @@ fun LazyProductRow(item: StoreScreenModel) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 12.dp),
     ) {
         items(
             items = when (item.columnSort) {
@@ -181,7 +184,8 @@ fun LazyStoreRow(item: StoreScreenModel) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(vertical = 8.dp)
+            .padding(vertical = 4.dp)
+            .clickable { /*TODO*/ }
     ) {
         Row(
             modifier = Modifier
@@ -251,6 +255,7 @@ fun Pathways() {
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(vertical = 8.dp)
+            .clickable { /*TODO*/ }
     ) {
         Row(
             modifier = Modifier
@@ -283,8 +288,8 @@ fun LazyStorePathwayRow() {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 12.dp),
     ) {
         items(
             items = storePathwayData.sortedBy { it.storePathwayRank }.take(6),
@@ -303,7 +308,9 @@ fun LazyStorePathwayRowItem(storePathway: StorePathwayModel) {
         modifier = Modifier
             .width(width = 140.dp)
             .wrapContentHeight()
-            .clip(shape = MaterialTheme.shapes.small),
+            .clip(shape = MaterialTheme.shapes.medium)
+            .clickable { /*TODO*/ }
+            .padding(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Image(
@@ -336,9 +343,10 @@ fun Carousel() {
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(16f / 9f)
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = 16.dp, vertical = 4.dp)
             .clip(shape = MaterialTheme.shapes.medium)
             .background(color = Color.Black)
+            .clickable { /*TODO*/ }
     ) {
         Image(
             modifier = Modifier
@@ -357,7 +365,8 @@ fun Categories() {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 4.dp)
+            .clickable { /*TODO*/ },
     ) {
         Row(
             modifier = Modifier
@@ -383,13 +392,16 @@ fun Categories() {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = 12.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .wrapContentHeight(),
+                    .wrapContentHeight()
+                    .clip(shape = MaterialTheme.shapes.small)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -417,7 +429,10 @@ fun Categories() {
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .wrapContentHeight(),
+                    .wrapContentHeight()
+                    .clip(shape = MaterialTheme.shapes.small)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -445,7 +460,10 @@ fun Categories() {
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .wrapContentHeight(),
+                    .wrapContentHeight()
+                    .clip(shape = MaterialTheme.shapes.small)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -473,7 +491,10 @@ fun Categories() {
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .wrapContentHeight(),
+                    .wrapContentHeight()
+                    .clip(shape = MaterialTheme.shapes.small)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -508,20 +529,22 @@ fun BusinessCards() {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(horizontal = 12.dp, vertical = 4.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Column(
                 modifier = Modifier
                     .weight(1f)
                     .wrapContentHeight()
-                    .clip(shape = MaterialTheme.shapes.small),
+                    .clip(shape = MaterialTheme.shapes.medium)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Box(
@@ -555,7 +578,9 @@ fun BusinessCards() {
                 modifier = Modifier
                     .weight(1f)
                     .wrapContentHeight()
-                    .clip(shape = MaterialTheme.shapes.small),
+                    .clip(shape = MaterialTheme.shapes.medium)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Box(
@@ -586,17 +611,20 @@ fun BusinessCards() {
                 )
             }
         }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Column(
                 modifier = Modifier
                     .weight(1f)
                     .wrapContentHeight()
-                    .clip(shape = MaterialTheme.shapes.small),
+                    .clip(shape = MaterialTheme.shapes.medium)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Box(
@@ -630,7 +658,9 @@ fun BusinessCards() {
                 modifier = Modifier
                     .weight(1f)
                     .wrapContentHeight()
-                    .clip(shape = MaterialTheme.shapes.small),
+                    .clip(shape = MaterialTheme.shapes.medium)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Box(
@@ -661,17 +691,20 @@ fun BusinessCards() {
                 )
             }
         }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Column(
                 modifier = Modifier
                     .weight(1f)
                     .wrapContentHeight()
-                    .clip(shape = MaterialTheme.shapes.small),
+                    .clip(shape = MaterialTheme.shapes.medium)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Box(
@@ -705,7 +738,9 @@ fun BusinessCards() {
                 modifier = Modifier
                     .weight(1f)
                     .wrapContentHeight()
-                    .clip(shape = MaterialTheme.shapes.small),
+                    .clip(shape = MaterialTheme.shapes.medium)
+                    .clickable { /*TODO*/ }
+                    .padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Box(
