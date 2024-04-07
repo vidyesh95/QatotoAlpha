@@ -5,7 +5,10 @@ import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,10 +37,12 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.GroupWork
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -87,6 +92,7 @@ fun ShortsPage() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ShortsItem(shortsModel: ShortsModel) {
     Box(
@@ -126,6 +132,7 @@ fun ShortsItem(shortsModel: ShortsModel) {
                         .wrapContentSize()
                         .clip(shape = MaterialTheme.shapes.extraSmall)
                         .background(color = Color.Black.copy(alpha = 0.5f))
+                        .clickable { /*TODO*/ }
                         .padding(all = 4.dp),
                     verticalAlignment = Alignment.Top,
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -503,14 +510,16 @@ fun ShortsItem(shortsModel: ShortsModel) {
                         Text(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .wrapContentHeight(),
+                                .wrapContentHeight()
+                                .basicMarquee(
+                                    iterations = Int.MAX_VALUE,
+                                    delayMillis = 0
+                                ),
                             text = "original soundtrack - Created by Quanmin Producer @user_name",
                             style = MaterialTheme.typography.labelSmall,
                             textAlign = TextAlign.Start,
                             color = Color.White,
-                            softWrap = true,
                             maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 }
@@ -527,27 +536,34 @@ fun ShortsItem(shortsModel: ShortsModel) {
                         .width(width = 40.dp)
                         .height(height = 48.dp)
                 ) {
-                    Image(
+                    IconButton(
                         modifier = Modifier
-                            .size(40.dp)
-                            .clip(shape = CircleShape)
-                            .border(
-                                width = 2.dp,
-                                color = Color.White,
-                                shape = CircleShape
-                            )
-                            .padding(all = 2.dp),
-                        painter = painterResource(
-                            id = shortsModel.profileImage
-                        ),
-                        contentDescription = "Profile Image",
-                    )
+                            .size(40.dp),
+                        onClick = { /*TODO*/ }
+                    ) {
+                        Image(
+                            modifier = Modifier
+                                .size(40.dp)
+                                .clip(shape = CircleShape)
+                                .border(
+                                    width = 2.dp,
+                                    color = Color.White,
+                                    shape = CircleShape
+                                )
+                                .padding(all = 2.dp),
+                            painter = painterResource(
+                                id = shortsModel.profileImage
+                            ),
+                            contentDescription = "Profile Image",
+                        )
+                    }
                     Box(
                         modifier = Modifier
                             .size(size = 16.dp)
                             .clip(shape = CircleShape)
                             .background(color = Color(0xFFFE2C55))
-                            .align(Alignment.BottomCenter),
+                            .align(Alignment.BottomCenter)
+                            .clickable { /*TODO*/ },
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
@@ -560,7 +576,16 @@ fun ShortsItem(shortsModel: ShortsModel) {
                 }
 
                 Column(
-                    modifier = Modifier.wrapContentSize(),
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember {
+                                MutableInteractionSource()
+                            }
+                        ) {
+                            /*TODO*/
+                        },
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -619,7 +644,16 @@ fun ShortsItem(shortsModel: ShortsModel) {
                 }
 
                 Column(
-                    modifier = Modifier.wrapContentSize(),
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember {
+                                MutableInteractionSource()
+                            }
+                        ) {
+                            /*TODO*/
+                        },
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -676,7 +710,16 @@ fun ShortsItem(shortsModel: ShortsModel) {
                 }
 
                 Column(
-                    modifier = Modifier.wrapContentSize(),
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember {
+                                MutableInteractionSource()
+                            }
+                        ) {
+                            /*TODO*/
+                        },
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -733,7 +776,16 @@ fun ShortsItem(shortsModel: ShortsModel) {
                 }
 
                 Column(
-                    modifier = Modifier.wrapContentSize(),
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember {
+                                MutableInteractionSource()
+                            }
+                        ) {
+                            /*TODO*/
+                        },
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -804,6 +856,7 @@ fun ShortsItem(shortsModel: ShortsModel) {
                                 end = Offset(0f, 37f)
                             )
                         )
+                        .clickable { /*TODO*/ },
                 ) {
                     Image(
                         modifier = Modifier
