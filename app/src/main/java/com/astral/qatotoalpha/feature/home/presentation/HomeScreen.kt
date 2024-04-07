@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -194,7 +195,8 @@ fun ShortsContainer(shortsModel: ShortsModel) {
         modifier = Modifier
             .width(160.dp)
             .aspectRatio(9f / 16f)
-            .clip(shape = MaterialTheme.shapes.small),
+            .clip(shape = MaterialTheme.shapes.small)
+            .clickable { /*TODO*/ },
     ) {
         Image(
             modifier = Modifier
@@ -210,15 +212,20 @@ fun ShortsContainer(shortsModel: ShortsModel) {
                 .background(color = Color.Black.copy(alpha = 0.25f))
         )
 
-        Icon(
+        IconButton(
             modifier = Modifier
                 .align(alignment = Alignment.TopEnd)
                 .padding(top = 6.dp)
                 .size(24.dp),
-            imageVector = Icons.Default.MoreVert,
-            contentDescription = "More Options",
-            tint = Color.White,
-        )
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.Default.MoreVert,
+                contentDescription = "More Options",
+                tint = Color.White,
+            )
+        }
 
         Column(
             modifier = Modifier
@@ -259,7 +266,8 @@ fun ShortsContainerLive(shortsModel: ShortsModel) {
         modifier = Modifier
             .width(160.dp)
             .aspectRatio(9f / 16f)
-            .clip(shape = MaterialTheme.shapes.small),
+            .clip(shape = MaterialTheme.shapes.small)
+            .clickable { /*TODO*/ },
     ) {
         Image(
             modifier = Modifier
@@ -275,15 +283,20 @@ fun ShortsContainerLive(shortsModel: ShortsModel) {
                 .background(color = Color.Black.copy(alpha = 0.25f))
         )
 
-        Icon(
+        IconButton(
             modifier = Modifier
                 .align(alignment = Alignment.TopEnd)
                 .padding(top = 6.dp)
                 .size(24.dp),
-            imageVector = Icons.Default.MoreVert,
-            contentDescription = "More Options",
-            tint = Color.White,
-        )
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = Icons.Default.MoreVert,
+                contentDescription = "More Options",
+                tint = Color.White,
+            )
+        }
 
         Column(
             modifier = Modifier
@@ -325,6 +338,7 @@ fun VideoContainer(videoModel: VideoModel) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .clickable { /*TODO*/ }
     ) {
         Image(
             modifier = Modifier
@@ -338,21 +352,27 @@ fun VideoContainer(videoModel: VideoModel) {
                 .fillMaxWidth()
                 .wrapContentHeight()
         ) {
-            Image(
+            IconButton(
                 modifier = Modifier
                     .padding(16.dp)
-                    .width(36.dp)
-                    .aspectRatio(ratio = 1f / 1f)
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        shape = CircleShape
-                    )
-                    .clip(shape = CircleShape),
-                painter = painterResource(id = videoModel.profileImage),
-                contentDescription = "Video Thumbnail",
-                contentScale = ContentScale.Crop
-            )
+                    .size(36.dp),
+                onClick = { /*TODO*/ }
+            ) {
+                Image(
+                    modifier = Modifier
+                        .width(36.dp)
+                        .aspectRatio(ratio = 1f / 1f)
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            shape = CircleShape
+                        )
+                        .clip(shape = CircleShape),
+                    painter = painterResource(id = videoModel.profileImage),
+                    contentDescription = "Video Thumbnail",
+                    contentScale = ContentScale.Crop
+                )
+            }
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -434,15 +454,22 @@ fun VideoContainer(videoModel: VideoModel) {
                     )
                 }
             }
-            Icon(
+            IconButton(
                 modifier = Modifier
                     .padding(end = 14.dp, top = 14.dp)
                     .width(14.dp)
                     .height(14.dp),
-                imageVector = Icons.Default.MoreVert,
-                contentDescription = "More Options",
-                tint = MaterialTheme.colorScheme.onBackground
-            )
+                onClick = { /*TODO*/ }
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .width(14.dp)
+                        .height(14.dp),
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = "More Options",
+                    tint = MaterialTheme.colorScheme.onBackground
+                )
+            }
         }
         HorizontalDivider(modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp))
     }
@@ -455,6 +482,7 @@ fun VideoContainerLive(videoModel: VideoModel) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .clickable { /*TODO*/ }
     ) {
         Image(
             modifier = Modifier
@@ -468,21 +496,27 @@ fun VideoContainerLive(videoModel: VideoModel) {
                 .fillMaxWidth()
                 .wrapContentHeight()
         ) {
-            Image(
+            IconButton(
                 modifier = Modifier
                     .padding(16.dp)
-                    .width(36.dp)
-                    .aspectRatio(ratio = 1f / 1f)
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        shape = CircleShape
-                    )
-                    .clip(shape = CircleShape),
-                painter = painterResource(id = videoModel.profileImage),
-                contentDescription = "Video Thumbnail",
-                contentScale = ContentScale.Crop
-            )
+                    .size(36.dp),
+                onClick = { /*TODO*/ }
+            ) {
+                Image(
+                    modifier = Modifier
+                        .width(36.dp)
+                        .aspectRatio(ratio = 1f / 1f)
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            shape = CircleShape
+                        )
+                        .clip(shape = CircleShape),
+                    painter = painterResource(id = videoModel.profileImage),
+                    contentDescription = "Video Thumbnail",
+                    contentScale = ContentScale.Crop
+                )
+            }
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -556,15 +590,22 @@ fun VideoContainerLive(videoModel: VideoModel) {
                     )
                 }
             }
-            Icon(
+            IconButton(
                 modifier = Modifier
                     .padding(end = 14.dp, top = 14.dp)
                     .width(14.dp)
                     .height(14.dp),
-                imageVector = Icons.Default.MoreVert,
-                contentDescription = "More Options",
-                tint = MaterialTheme.colorScheme.onBackground
-            )
+                onClick = { /*TODO*/ }
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .width(14.dp)
+                        .height(14.dp),
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = "More Options",
+                    tint = MaterialTheme.colorScheme.onBackground
+                )
+            }
         }
         HorizontalDivider(modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp))
     }
