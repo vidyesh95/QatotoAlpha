@@ -36,6 +36,7 @@ import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.GroupWork
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -583,10 +584,8 @@ fun ShortsItem(shortsModel: ShortsModel) {
                     modifier = Modifier
                         .wrapContentSize()
                         .clickable(
-                            indication = null,
-                            interactionSource = remember {
-                                MutableInteractionSource()
-                            }
+                            indication = rememberRipple(bounded = false, radius = 26.dp),
+                            interactionSource = remember { MutableInteractionSource() }
                         ) {
                             /*TODO*/
                         },
@@ -651,10 +650,8 @@ fun ShortsItem(shortsModel: ShortsModel) {
                     modifier = Modifier
                         .wrapContentSize()
                         .clickable(
-                            indication = null,
-                            interactionSource = remember {
-                                MutableInteractionSource()
-                            }
+                            indication = rememberRipple(bounded = false, radius = 26.dp),
+                            interactionSource = remember { MutableInteractionSource() }
                         ) {
                             /*TODO*/
                         },
@@ -717,10 +714,8 @@ fun ShortsItem(shortsModel: ShortsModel) {
                     modifier = Modifier
                         .wrapContentSize()
                         .clickable(
-                            indication = null,
-                            interactionSource = remember {
-                                MutableInteractionSource()
-                            }
+                            indication = rememberRipple(bounded = false, radius = 26.dp),
+                            interactionSource = remember { MutableInteractionSource() }
                         ) {
                             /*TODO*/
                         },
@@ -783,10 +778,8 @@ fun ShortsItem(shortsModel: ShortsModel) {
                     modifier = Modifier
                         .wrapContentSize()
                         .clickable(
-                            indication = null,
-                            interactionSource = remember {
-                                MutableInteractionSource()
-                            }
+                            indication = rememberRipple(bounded = false, radius = 26.dp),
+                            interactionSource = remember { MutableInteractionSource() }
                         ) {
                             /*TODO*/
                         },
