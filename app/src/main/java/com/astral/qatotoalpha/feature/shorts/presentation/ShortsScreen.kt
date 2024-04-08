@@ -498,7 +498,11 @@ fun ShortsItem(shortsModel: ShortsModel) {
                                 .fillMaxWidth()
                                 .wrapContentHeight()
                                 .blur(radius = 2.dp)
-                                .offset(x = 0.dp, y = 1.dp),
+                                .offset(x = 0.dp, y = 1.dp)
+                                .basicMarquee(
+                                    iterations = Int.MAX_VALUE,
+                                    delayMillis = 0
+                                ),
                             text = "original soundtrack - Created by Quanmin Producer @user_name",
                             style = MaterialTheme.typography.labelSmall,
                             textAlign = TextAlign.Start,
