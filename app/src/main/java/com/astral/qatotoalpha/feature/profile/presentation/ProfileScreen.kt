@@ -187,7 +187,7 @@ fun ProfileCard(navController: NavController) {
                 ElevatedCard(
                     modifier = Modifier
                         .wrapContentSize(),
-                    onClick = { /*TODO*/ }
+                    onClick = { navController.navigate(Graph.AUTH_GRAPH) }
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp),
