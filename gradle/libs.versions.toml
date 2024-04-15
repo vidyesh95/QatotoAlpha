@@ -1,6 +1,6 @@
 [versions]
 com-android-application = "8.3.2"
-org-jetbrains-kotlin-android = "1.9.22"
+org-jetbrains-kotlin-android = "1.9.23"
 core-ktx = "1.12.0"
 core-splashscreen = "1.0.1"
 junit = "4.13.2"
