@@ -13,6 +13,7 @@ navigationCompose = "2.7.7"
 generativeai = "0.3.0"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 google-services = "4.4.1"
+google-crashlytics = "2.9.9"
 firebase-bom = "32.8.1"
 datastoreCore = "1.0.0"
 
@@ -46,5 +47,6 @@ com-android-application = { id = "com.android.application", version.ref = "com-a
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 google-android-libraries-mapsplatform-secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "googleAndroidLibrariesMapsplatformSecretsGradlePlugin" }
 com-google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+com-google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "google-crashlytics" }
 
 [bundles]

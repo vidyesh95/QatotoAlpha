@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.services)
+    alias(libs.plugins.com.google.firebase.crashlytics)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
@@ -67,7 +68,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.generativeai)
     implementation(platform(libs.firebase.bom))
-    //implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
     testImplementation(libs.junit)
