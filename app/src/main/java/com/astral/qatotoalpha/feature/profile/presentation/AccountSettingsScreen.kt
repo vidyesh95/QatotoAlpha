@@ -1,5 +1,6 @@
 package com.astral.qatotoalpha.feature.profile.presentation
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -36,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -219,6 +221,7 @@ fun AccountSettingsItem(
     accountSettingsScreenModel: AccountSettingsScreenModel,
     navController: NavController
 ) {
+    val context = LocalContext.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -229,7 +232,16 @@ fun AccountSettingsItem(
                         navController.navigate(Graph.AUTH_GRAPH)
                     }
                     if (accountSettingsScreenModel.accountSettingsId == 2) {
+                        // sign out
                         Firebase.auth.signOut()
+                    }
+                    if (accountSettingsScreenModel.accountSettingsId == 10) {
+                        // clear app cache
+                        try {
+                            context.cacheDir?.deleteRecursively()
+                        } catch (e: Exception) {
+                            Log.e("CacheDeletion", "Failed to delete cache", e)
+                        }
                     }
                 }
             )

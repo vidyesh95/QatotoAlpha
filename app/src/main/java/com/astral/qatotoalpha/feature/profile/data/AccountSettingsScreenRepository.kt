@@ -7,6 +7,7 @@ import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.AddIcCall
 import androidx.compose.material.icons.filled.AddPhotoAlternate
 import androidx.compose.material.icons.filled.AlternateEmail
+import androidx.compose.material.icons.filled.Cached
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Storage
@@ -66,6 +67,11 @@ class AccountSettingsScreenRepository {
                 accountSettingsId = 9,
                 accountSettingsImageVector = Icons.AutoMirrored.Filled.ForwardToInbox,
                 accountSettingsText = R.string.set_recovery_email_address
+            ),
+            AccountSettingsScreenModel(
+                accountSettingsId = 10,
+                accountSettingsImageVector = Icons.Filled.Cached,
+                accountSettingsText = R.string.clear_cache
             )
         )
     }

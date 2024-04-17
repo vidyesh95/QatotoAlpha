@@ -34,6 +34,7 @@
     <string name="set_profile_photo">Set profile photo</string>
     <string name="set_email_address">Set email address</string>
     <string name="set_recovery_email_address">Set recovery email address</string>
+    <string name="clear_cache">Clear cache</string>
     <string name="link_google_account">Link Google account</string>
     <string name="link_apple_account">Link Apple account</string>
     <string name="upload_video">Upload video</string>
