@@ -14,8 +14,8 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : ComponentActivity() {
 
     companion object {
-        const val AUTH_PORT = 9099
-        const val LOCALHOST = "10.0.2.2"
+        const val AUTH_PORT = 9150
+        const val LOCALHOST = "127.0.0.1"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
