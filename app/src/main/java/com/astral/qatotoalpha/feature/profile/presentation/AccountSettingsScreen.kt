@@ -47,8 +47,11 @@ import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
 import com.astral.qatotoalpha.feature.profile.data.AccountSettingsScreenRepository
 import com.astral.qatotoalpha.feature.profile.domain.AccountSettingsScreenModel
+import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.Screen
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 @Composable
 fun AccountSettingsScreen(navController: NavController) {
@@ -220,7 +223,16 @@ fun AccountSettingsItem(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable(onClick = { })
+            .clickable(
+                onClick = {
+                    if (accountSettingsScreenModel.accountSettingsId == 0) {
+                        navController.navigate(Graph.AUTH_GRAPH)
+                    }
+                    if (accountSettingsScreenModel.accountSettingsId == 2) {
+                        Firebase.auth.signOut()
+                    }
+                }
+            )
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
