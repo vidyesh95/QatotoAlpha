@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.Screen
 
@@ -106,7 +107,11 @@ fun LoginScreenContent(innerPadding: PaddingValues, navController: NavController
             colors = IconButtonDefaults.outlinedIconButtonColors(
                 containerColor = Color.White.copy(alpha = 0.2f),
             ),
-            onClick = { /*TODO*/ }
+            onClick = {
+                navController.navigate(Graph.MAIN_GRAPH) {
+                    popUpTo(Graph.MAIN_GRAPH) { inclusive = true }
+                }
+            }
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -132,7 +137,11 @@ fun LoginScreenContent(innerPadding: PaddingValues, navController: NavController
             colors = IconButtonDefaults.outlinedIconButtonColors(
                 containerColor = Color.White.copy(alpha = 0.2f),
             ),
-            onClick = { /*TODO*/ }
+            onClick = {
+                navController.navigate(Graph.MAIN_GRAPH) {
+                    popUpTo(Graph.MAIN_GRAPH) { inclusive = true }
+                }
+            }
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
