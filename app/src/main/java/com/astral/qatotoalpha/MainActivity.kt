@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Configure firebase auth to run against firebase emulator suite
-        configureFirebaseServices()
+        //configureFirebaseServices()
 
         setContent {
             val sharedPref = getSharedPreferences(
