@@ -5,12 +5,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInState
+import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInViewModel
 import com.astral.qatotoalpha.feature.profile.presentation.AccountSettingsScreen
 import com.astral.qatotoalpha.feature.profile.presentation.ProfileScreen
 import com.astral.qatotoalpha.util.Screen
 
 fun NavGraphBuilder.profileNavigationGraph(
     navController: NavHostController,
+    signInViewModel: SignInViewModel,
     signInState: SignInState,
     onContinueWithGoogleClick: () -> Unit
 ) {
@@ -26,6 +28,7 @@ fun NavGraphBuilder.profileNavigationGraph(
         }
         authNavigationGraph(
             navController = navController,
+            signInViewModel = signInViewModel,
             signInState = signInState,
             onContinueWithGoogleClick = onContinueWithGoogleClick
         )

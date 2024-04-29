@@ -53,6 +53,7 @@ import com.astral.qatotoalpha.util.Screen
 @Composable
 fun SignInScreen(
     navController: NavController,
+    signInViewModel: SignInViewModel,
     signInState: SignInState,
     onContinueWithGoogleClick: () -> Unit
 ) {
@@ -60,6 +61,15 @@ fun SignInScreen(
     LaunchedEffect(key1 = signInState.signInErrorMessage) {
         signInState.signInErrorMessage?.let { errorMessage ->
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    LaunchedEffect(key1 = signInState.isSignInSuccessful) {
+        if (signInState.isSignInSuccessful) {
+            navController.navigate(Graph.MAIN_GRAPH) {
+                popUpTo(Graph.MAIN_GRAPH) { inclusive = true }
+            }
+            signInViewModel.resetState()
         }
     }
 
@@ -140,12 +150,13 @@ fun SignInScreenContent(
                 containerColor = Color.White.copy(alpha = 0.2f),
             ),
             onClick = {
-                onContinueWithGoogleClick
-                if (signInState.isSignInSuccessful) {
+                onContinueWithGoogleClick()
+
+                /*if (signInState.isSignInSuccessful) {
                     navController.navigate(Graph.MAIN_GRAPH) {
                         popUpTo(Graph.MAIN_GRAPH) { inclusive = true }
                     }
-                }
+                }*/
             }
         ) {
             Row(

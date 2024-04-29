@@ -82,6 +82,7 @@ class MainActivity : ComponentActivity() {
             RootNavigationGraph(
                 navController = navController,
                 isContinueAccepted = isContinueAcceptedFromSharedPref,
+                signInViewModel = signInViewModel,
                 signInState = signInState,
                 onContinueWithGoogleClick = onContinueWithGoogleClick
             )

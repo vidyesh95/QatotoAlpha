@@ -8,12 +8,14 @@ import com.astral.qatotoalpha.feature.auth.presentation.forgotpass.ForgotPassScr
 import com.astral.qatotoalpha.feature.auth.presentation.newpass.NewPassScreen
 import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInScreen
 import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInState
+import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInViewModel
 import com.astral.qatotoalpha.feature.auth.presentation.signinwithpass.SignInWithPassScreen
 import com.astral.qatotoalpha.feature.auth.presentation.signup.SignUpScreen
 import com.astral.qatotoalpha.util.Screen
 
 fun NavGraphBuilder.authNavigationGraph(
     navController: NavHostController,
+    signInViewModel: SignInViewModel,
     signInState: SignInState,
     onContinueWithGoogleClick: () -> Unit
 ) {
@@ -24,6 +26,7 @@ fun NavGraphBuilder.authNavigationGraph(
         composable(route = Screen.LoginScreen.route) {
             SignInScreen(
                 navController = navController,
+                signInViewModel = signInViewModel,
                 signInState = signInState,
                 onContinueWithGoogleClick = onContinueWithGoogleClick
             )
