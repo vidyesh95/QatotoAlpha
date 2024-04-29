@@ -2,6 +2,7 @@ package com.astral.qatotoalpha
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -15,6 +16,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.feature.auth.presentation.signin.GoogleAuthUiClient
 import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInViewModel
+import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.graphs.RootNavigationGraph
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.firebase.auth.ktx.auth
@@ -91,7 +93,19 @@ class MainActivity : ComponentActivity() {
                 isContinueAccepted = isContinueAcceptedFromSharedPref,
                 signInViewModel = signInViewModel,
                 signInState = signInState,
-                onContinueWithGoogleClick = onContinueWithGoogleClick
+                onContinueWithGoogleClick = onContinueWithGoogleClick,
+                userData = googleAuthUiClient.getSignedInUser(),
+                onSignOut = {
+                    lifecycleScope.launch {
+                        googleAuthUiClient.signOut()
+                        Toast.makeText(
+                            applicationContext,
+                            "Signed out successfully",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        navController.navigate(Graph.PROFILE_GRAPH)
+                    }
+                }
             )
         }
     }

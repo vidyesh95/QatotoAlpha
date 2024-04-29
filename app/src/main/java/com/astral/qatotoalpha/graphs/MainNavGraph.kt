@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import com.astral.qatotoalpha.feature.anime.presentation.AnimeScreen
 import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInState
 import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInViewModel
+import com.astral.qatotoalpha.feature.auth.presentation.signin.UserData
 import com.astral.qatotoalpha.feature.create.presentaion.CreateScreen
 import com.astral.qatotoalpha.feature.home.presentation.HomeScreen
 import com.astral.qatotoalpha.feature.shorts.presentation.ShortsScreen
@@ -22,7 +23,9 @@ fun MainNavigationGraph(
     innerPadding: PaddingValues,
     signInViewModel: SignInViewModel,
     signInState: SignInState,
-    onContinueWithGoogleClick: () -> Unit
+    onContinueWithGoogleClick: () -> Unit,
+    userData: UserData?,
+    onSignOut: () -> Unit
 ) {
     NavHost(
         navController = navController,
@@ -49,7 +52,9 @@ fun MainNavigationGraph(
             navController = navController,
             signInViewModel = signInViewModel,
             signInState = signInState,
-            onContinueWithGoogleClick = onContinueWithGoogleClick
+            onContinueWithGoogleClick = onContinueWithGoogleClick,
+            userData = userData,
+            onSignOut = onSignOut
         )
     }
 }

@@ -37,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -46,23 +47,27 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.feature.auth.presentation.signin.UserData
 import com.astral.qatotoalpha.feature.profile.data.AccountSettingsScreenRepository
 import com.astral.qatotoalpha.feature.profile.domain.AccountSettingsScreenModel
 import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.Screen
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 @Composable
-fun AccountSettingsScreen(navController: NavController) {
-    AccountSettingsPage(navController = navController)
+fun AccountSettingsScreen(
+    navController: NavController,
+    userData: UserData?,
+    onSignOut: () -> Unit
+) {
+    AccountSettingsPage(navController = navController, userData = userData, onSignOut = onSignOut)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccountSettingsPage(navController: NavController) {
+fun AccountSettingsPage(navController: NavController, userData: UserData?, onSignOut: () -> Unit) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -100,7 +105,9 @@ fun AccountSettingsPage(navController: NavController) {
             ) { innerPadding ->
                 AccountSettingsScreenContent(
                     innerPadding = innerPadding,
-                    navController = navController
+                    navController = navController,
+                    userData = userData,
+                    onSignOut = onSignOut
                 )
             }
         }
@@ -108,7 +115,12 @@ fun AccountSettingsPage(navController: NavController) {
 }
 
 @Composable
-fun AccountSettingsScreenContent(innerPadding: PaddingValues, navController: NavController) {
+fun AccountSettingsScreenContent(
+    innerPadding: PaddingValues,
+    navController: NavController,
+    userData: UserData?,
+    onSignOut: () -> Unit
+) {
     val accountSettingsScreenRepository = AccountSettingsScreenRepository()
     val accountSettingsScreenData = accountSettingsScreenRepository.getAllData()
     LazyColumn(
@@ -124,11 +136,12 @@ fun AccountSettingsScreenContent(innerPadding: PaddingValues, navController: Nav
             },
             itemContent = { index: Int, item: AccountSettingsScreenModel ->
                 if (index == 0) {
-                    AccountSettingsTop()
+                    AccountSettingsTop(userData = userData)
                 }
                 AccountSettingsItem(
                     accountSettingsScreenModel = item,
-                    navController = navController
+                    navController = navController,
+                    onSignOut = onSignOut
                 )
             }
         )
@@ -219,7 +232,8 @@ fun LinkItems() {
 @Composable
 fun AccountSettingsItem(
     accountSettingsScreenModel: AccountSettingsScreenModel,
-    navController: NavController
+    navController: NavController,
+    onSignOut: () -> Unit
 ) {
     val context = LocalContext.current
     Row(
@@ -233,7 +247,8 @@ fun AccountSettingsItem(
                     }
                     if (accountSettingsScreenModel.accountSettingsId == 2) {
                         // sign out
-                        Firebase.auth.signOut()
+                        //Firebase.auth.signOut()
+                        onSignOut()
                     }
                     if (accountSettingsScreenModel.accountSettingsId == 10) {
                         // clear app cache
@@ -278,7 +293,7 @@ fun AccountSettingsItem(
 }
 
 @Composable
-fun AccountSettingsTop() {
+fun AccountSettingsTop(userData: UserData?) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -304,14 +319,28 @@ fun AccountSettingsTop() {
                     verticalArrangement = Arrangement.spacedBy(space = 24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .aspectRatio(ratio = 1 / 1f)
-                            .clip(shape = MaterialTheme.shapes.small),
-                        painter = painterResource(id = R.drawable.profile_default),
-                        contentDescription = "profile image"
-                    )
+                    if (userData?.profilePictureUrl != null) {
+                        AsyncImage(
+                            model = userData.profilePictureUrl,
+                            contentDescription = "profile image",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .aspectRatio(ratio = 1 / 1f)
+                                .clip(shape = MaterialTheme.shapes.small),
+                            contentScale = ContentScale.Crop
+                        )
+                    } else {
+                        Image(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .aspectRatio(ratio = 1 / 1f)
+                                .clip(shape = MaterialTheme.shapes.small),
+                            painter = painterResource(id = R.drawable.profile_default),
+                            contentDescription = "profile image",
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -333,15 +362,29 @@ fun AccountSettingsTop() {
                 }
             }
 
-            Image(
-                modifier = Modifier
-                    .padding(horizontal = 56.dp)
-                    .width(80.dp)
-                    .height(80.dp)
-                    .clip(shape = MaterialTheme.shapes.small),
-                painter = painterResource(id = R.drawable.profile_default),
-                contentDescription = "profile image"
-            )
+            if (userData?.profilePictureUrl != null) {
+                AsyncImage(
+                    model = userData.profilePictureUrl,
+                    contentDescription = "profile image",
+                    modifier = Modifier
+                        .padding(horizontal = 56.dp)
+                        .width(80.dp)
+                        .height(80.dp)
+                        .clip(shape = MaterialTheme.shapes.small),
+                    contentScale = ContentScale.Crop
+                )
+            } else {
+                Image(
+                    modifier = Modifier
+                        .padding(horizontal = 56.dp)
+                        .width(80.dp)
+                        .height(80.dp)
+                        .clip(shape = MaterialTheme.shapes.small),
+                    painter = painterResource(id = R.drawable.profile_default),
+                    contentDescription = "profile image",
+                    contentScale = ContentScale.Crop
+                )
+            }
         }
         LinkItems()
     }
@@ -353,5 +396,10 @@ fun AccountSettingsTop() {
 @Composable
 fun AccountSettingsScreenPreview() {
     val navController = rememberNavController()
-    AccountSettingsPage(navController = navController)
+    val userData = UserData(
+        userID = "123456",
+        username = null,
+        profilePictureUrl = null
+    )
+    AccountSettingsPage(navController = navController, userData = userData, onSignOut = {})
 }

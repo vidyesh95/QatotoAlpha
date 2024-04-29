@@ -20,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInState
 import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInViewModel
+import com.astral.qatotoalpha.feature.auth.presentation.signin.UserData
 import com.astral.qatotoalpha.graphs.MainNavigationGraph
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.NavigationBarScreen
@@ -28,12 +29,16 @@ import com.astral.qatotoalpha.util.NavigationBarScreen
 fun MainScreen(
     signInViewModel: SignInViewModel,
     signInState: SignInState,
-    onContinueWithGoogleClick: () -> Unit
+    onContinueWithGoogleClick: () -> Unit,
+    userData: UserData?,
+    onSignOut: () -> Unit
 ) {
     MainPage(
         signInViewModel = signInViewModel,
         signInState = signInState,
-        onContinueWithGoogleClick = onContinueWithGoogleClick
+        onContinueWithGoogleClick = onContinueWithGoogleClick,
+        userData = userData,
+        onSignOut = onSignOut
     )
 }
 
@@ -42,7 +47,9 @@ fun MainScreen(
 fun MainPage(
     signInViewModel: SignInViewModel,
     signInState: SignInState,
-    onContinueWithGoogleClick: () -> Unit
+    onContinueWithGoogleClick: () -> Unit,
+    userData: UserData?,
+    onSignOut: () -> Unit
 ) {
     val items = listOf(
         NavigationBarScreen.HomeScreen,
@@ -119,7 +126,9 @@ fun MainPage(
                     innerPadding = innerPadding,
                     signInViewModel = signInViewModel,
                     signInState = signInState,
-                    onContinueWithGoogleClick = onContinueWithGoogleClick
+                    onContinueWithGoogleClick = onContinueWithGoogleClick,
+                    userData = userData,
+                    onSignOut = onSignOut
                 )
             }
         }
