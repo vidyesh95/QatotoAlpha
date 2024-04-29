@@ -54,6 +54,13 @@ class MainActivity : ComponentActivity() {
             val signInViewModel = viewModel<SignInViewModel>()
             val signInState by signInViewModel.state.collectAsStateWithLifecycle()
 
+            // If user is not signed in, navigate to auth graph optionally
+            /*LaunchedEffect(key1 = Unit) {
+                if (googleAuthUiClient.getSignedInUser() == null) {
+                    navController.navigate(Graph.AUTH_GRAPH)
+                }
+            }*/
+
             val launcher = rememberLauncherForActivityResult(
                 contract = ActivityResultContracts.StartIntentSenderForResult(),
                 onResult = { result ->

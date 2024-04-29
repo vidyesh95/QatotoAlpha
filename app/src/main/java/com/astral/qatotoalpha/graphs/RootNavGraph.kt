@@ -37,8 +37,12 @@ fun RootNavigationGraph(
                 onContinueWithGoogleClick = onContinueWithGoogleClick
             )
         }
-        //profileNavigationGraph(navController = navController)
-        //authNavigationGraph(navController = navController)
+        authNavigationGraph(
+            navController = navController,
+            signInViewModel = signInViewModel,
+            signInState = signInState,
+            onContinueWithGoogleClick = onContinueWithGoogleClick
+        )
     }
 }
 
