@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.coil.compose)
     implementation(libs.play.services.auth)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

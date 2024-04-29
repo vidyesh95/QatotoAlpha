@@ -18,18 +18,19 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInState
 import com.astral.qatotoalpha.graphs.MainNavigationGraph
 import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.NavigationBarScreen
 
 @Composable
-fun MainScreen() {
-    MainPage()
+fun MainScreen(signInState: SignInState, onContinueWithGoogleClick: () -> Unit) {
+    MainPage(signInState = signInState, onContinueWithGoogleClick = onContinueWithGoogleClick)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainPage() {
+fun MainPage(signInState: SignInState, onContinueWithGoogleClick: () -> Unit) {
     val items = listOf(
         NavigationBarScreen.HomeScreen,
         NavigationBarScreen.AnimeScreen,
@@ -100,7 +101,12 @@ fun MainPage() {
                     }
                 }
             ) { innerPadding ->
-                MainNavigationGraph(navController = navController, innerPadding = innerPadding)
+                MainNavigationGraph(
+                    navController = navController,
+                    innerPadding = innerPadding,
+                    signInState = signInState,
+                    onContinueWithGoogleClick = onContinueWithGoogleClick
+                )
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.astral.qatotoalpha.feature.auth.presentation.signin
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,11 +33,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -48,13 +51,32 @@ import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun SignInScreen(navController: NavController) {
-    SignInPage(navController = navController)
+fun SignInScreen(
+    navController: NavController,
+    signInState: SignInState,
+    onContinueWithGoogleClick: () -> Unit
+) {
+    val context = LocalContext.current
+    LaunchedEffect(key1 = signInState.signInErrorMessage) {
+        signInState.signInErrorMessage?.let { errorMessage ->
+            Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    SignInPage(
+        navController = navController,
+        signInState = signInState,
+        onContinueWithGoogleClick = onContinueWithGoogleClick
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignInPage(navController: NavController) {
+fun SignInPage(
+    navController: NavController,
+    signInState: SignInState,
+    onContinueWithGoogleClick: () -> Unit
+) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -81,14 +103,24 @@ fun SignInPage(navController: NavController) {
                     )
                 }
             ) { innerPadding ->
-                SignInScreenContent(innerPadding = innerPadding, navController = navController)
+                SignInScreenContent(
+                    innerPadding = innerPadding,
+                    navController = navController,
+                    signInState = signInState,
+                    onContinueWithGoogleClick = onContinueWithGoogleClick
+                )
             }
         }
     }
 }
 
 @Composable
-fun SignInScreenContent(innerPadding: PaddingValues, navController: NavController) {
+fun SignInScreenContent(
+    innerPadding: PaddingValues,
+    navController: NavController,
+    signInState: SignInState,
+    onContinueWithGoogleClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -108,8 +140,11 @@ fun SignInScreenContent(innerPadding: PaddingValues, navController: NavControlle
                 containerColor = Color.White.copy(alpha = 0.2f),
             ),
             onClick = {
-                navController.navigate(Graph.MAIN_GRAPH) {
-                    popUpTo(Graph.MAIN_GRAPH) { inclusive = true }
+                onContinueWithGoogleClick
+                if (signInState.isSignInSuccessful) {
+                    navController.navigate(Graph.MAIN_GRAPH) {
+                        popUpTo(Graph.MAIN_GRAPH) { inclusive = true }
+                    }
                 }
             }
         ) {
@@ -242,5 +277,9 @@ fun SignInScreenContent(innerPadding: PaddingValues, navController: NavControlle
 @Composable
 fun SignInScreenPreview() {
     val navController = rememberNavController()
-    SignInPage(navController = navController)
+    SignInPage(
+        navController = navController,
+        signInState = SignInState(),
+        onContinueWithGoogleClick = { /* provide a default action here */ }
+    )
 }

@@ -4,12 +4,18 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInState
 import com.astral.qatotoalpha.feature.firsttime.presentation.FirstScreen
 import com.astral.qatotoalpha.feature.navbar.presentation.MainScreen
 import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun RootNavigationGraph(navController: NavHostController, isContinueAccepted: Boolean?) {
+fun RootNavigationGraph(
+    navController: NavHostController,
+    isContinueAccepted: Boolean?,
+    signInState: SignInState,
+    onContinueWithGoogleClick: () -> Unit
+) {
     NavHost(
         navController = navController,
         route = Graph.ROOT_GRAPH,
@@ -23,7 +29,10 @@ fun RootNavigationGraph(navController: NavHostController, isContinueAccepted: Bo
             FirstScreen(navController = navController)
         }
         composable(route = Screen.MainScreen.route) {
-            MainScreen()
+            MainScreen(
+                signInState = signInState,
+                onContinueWithGoogleClick = onContinueWithGoogleClick
+            )
         }
         //profileNavigationGraph(navController = navController)
         //authNavigationGraph(navController = navController)
