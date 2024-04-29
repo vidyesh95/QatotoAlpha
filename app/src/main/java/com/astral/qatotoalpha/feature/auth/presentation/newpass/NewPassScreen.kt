@@ -304,7 +304,7 @@ fun NewPassScreenContent(innerPadding: PaddingValues, navController: NavControll
             )
         }
 
-        // google and apple login buttons
+        // google and apple signin buttons
         Row(
             modifier = Modifier
                 .wrapContentSize()

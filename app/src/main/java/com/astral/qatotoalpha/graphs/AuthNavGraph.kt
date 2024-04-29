@@ -5,10 +5,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.astral.qatotoalpha.feature.auth.presentation.forgotpass.ForgotPassScreen
-import com.astral.qatotoalpha.feature.auth.presentation.login.LoginScreen
 import com.astral.qatotoalpha.feature.auth.presentation.loginwithpass.LoginWithPassScreen
 import com.astral.qatotoalpha.feature.auth.presentation.newpass.NewPassScreen
 import com.astral.qatotoalpha.feature.auth.presentation.register.RegisterScreen
+import com.astral.qatotoalpha.feature.auth.presentation.signin.SignInScreen
 import com.astral.qatotoalpha.util.Screen
 
 
@@ -18,7 +18,7 @@ fun NavGraphBuilder.authNavigationGraph(navController: NavHostController) {
         startDestination = Screen.LoginScreen.route
     ) {
         composable(route = Screen.LoginScreen.route) {
-            LoginScreen(navController = navController)
+            SignInScreen(navController = navController)
         }
         composable(route = Screen.LoginWithPassScreen.route) {
             LoginWithPassScreen(navController = navController)

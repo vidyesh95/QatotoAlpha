@@ -1,4 +1,4 @@
-package com.astral.qatotoalpha.feature.auth.presentation.login
+package com.astral.qatotoalpha.feature.auth.presentation.signin
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -48,13 +48,13 @@ import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun LoginScreen(navController: NavController) {
-    LoginPage(navController = navController)
+fun SignInScreen(navController: NavController) {
+    SignInPage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(navController: NavController) {
+fun SignInPage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -81,14 +81,14 @@ fun LoginPage(navController: NavController) {
                     )
                 }
             ) { innerPadding ->
-                LoginScreenContent(innerPadding = innerPadding, navController = navController)
+                SignInScreenContent(innerPadding = innerPadding, navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun LoginScreenContent(innerPadding: PaddingValues, navController: NavController) {
+fun SignInScreenContent(innerPadding: PaddingValues, navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -240,7 +240,7 @@ fun LoginScreenContent(innerPadding: PaddingValues, navController: NavController
 //@PreviewDynamicColors
 @PreviewLightDark
 @Composable
-fun LoginScreenPreview() {
+fun SignInScreenPreview() {
     val navController = rememberNavController()
-    LoginPage(navController = navController)
+    SignInPage(navController = navController)
 }

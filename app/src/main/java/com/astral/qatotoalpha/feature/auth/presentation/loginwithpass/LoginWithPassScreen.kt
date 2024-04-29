@@ -323,7 +323,7 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavCo
             )
         }
 
-        // google and apple login buttons
+        // google and apple signin buttons
         Row(
             modifier = Modifier
                 .wrapContentSize()

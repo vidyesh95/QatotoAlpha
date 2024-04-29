@@ -202,7 +202,7 @@ fun ForgotPassScreenContent(innerPadding: PaddingValues, navController: NavContr
             )
         }
 
-        // google and apple login buttons
+        // google and apple signin buttons
         Row(
             modifier = Modifier
                 .wrapContentSize()

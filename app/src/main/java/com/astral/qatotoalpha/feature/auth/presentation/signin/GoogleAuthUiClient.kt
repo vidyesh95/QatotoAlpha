@@ -1,4 +1,4 @@
-package com.astral.qatotoalpha.feature.auth.presentation.login
+package com.astral.qatotoalpha.feature.auth.presentation.signin
 
 import android.content.Context
 import android.content.Intent

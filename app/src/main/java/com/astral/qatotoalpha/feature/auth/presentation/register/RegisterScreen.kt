@@ -338,7 +338,7 @@ fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavControl
             )
         }
 
-        // google and apple login buttons
+        // google and apple signin buttons
         Row(
             modifier = Modifier
                 .wrapContentSize()

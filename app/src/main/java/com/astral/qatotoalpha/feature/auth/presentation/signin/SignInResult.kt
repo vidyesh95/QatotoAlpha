@@ -1,9 +1,7 @@
-package com.astral.qatotoalpha.feature.auth.presentation.login
+package com.astral.qatotoalpha.feature.auth.presentation.signin
 
 
 data class SignInResult(
-    //val success: Boolean,
-    //val message: String,
     val data: UserData?,
     val errorMessage: String?
 )
