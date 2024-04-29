@@ -59,6 +59,26 @@ class GoogleAuthUiClient(
         }
     }
 
+    suspend fun signOut() {
+        try {
+            signInClient.signOut().await()
+            auth.signOut()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            if (e is CancellationException) throw e
+        }
+    }
+
+    fun getSignedInUser(): UserData? {
+        val user = auth.currentUser
+        return user?.run {
+            UserData(
+                userID = uid,
+                username = displayName,
+                profilePictureUrl = photoUrl?.toString()
+            )
+        }
+    }
 
     private fun buildSignInRequest(): BeginSignInRequest {
         return BeginSignInRequest.Builder()
