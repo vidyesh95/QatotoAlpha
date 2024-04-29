@@ -1,4 +1,4 @@
-package com.astral.qatotoalpha.feature.auth.presentation.loginwithpass
+package com.astral.qatotoalpha.feature.auth.presentation.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -58,7 +58,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -69,13 +68,13 @@ import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun LoginWithPassScreen(navController: NavController) {
-    LoginWithPassPage(navController = navController)
+fun SignUpScreen(navController: NavController) {
+    SignUpPage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginWithPassPage(navController: NavController) {
+fun SignUpPage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -90,17 +89,11 @@ fun LoginWithPassPage(navController: NavController) {
                     LargeTopAppBar(
                         title = {
                             Text(
-                                text = "Sign in with Password"
+                                text = "Sign up"
                             )
                         },
                         navigationIcon = {
-                            IconButton(
-                                onClick = {
-                                    if (navController.currentBackStackEntry?.destination?.route == Screen.LoginWithPassScreen.route) {
-                                        navController.popBackStack()
-                                    }
-                                }
-                            ) {
+                            IconButton(onClick = { navController.popBackStack() }) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                     contentDescription = "Back"
@@ -111,22 +104,22 @@ fun LoginWithPassPage(navController: NavController) {
                     )
                 }
             ) { innerPadding ->
-                LoginWithPassScreenContent(
-                    innerPadding = innerPadding,
-                    navController = navController
-                )
+                RegisterScreenContent(innerPadding = innerPadding, navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavController) {
+fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavController) {
     // Handle or Email text field
-    var emailHandleText by remember { mutableStateOf("") }
+    var registerEmailHandleText by remember { mutableStateOf("") }
 
     // Password text field
-    var passwordText by remember { mutableStateOf("") }
+    var registerPasswordText by remember { mutableStateOf("") }
+
+    // Repeat Password text field
+    var repeatPasswordText by remember { mutableStateOf("") }
 
     // Remember me switch
     var checked by remember { mutableStateOf(false) }
@@ -164,9 +157,9 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavCo
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            value = emailHandleText,
+            value = registerEmailHandleText,
             onValueChange = {
-                emailHandleText = it
+                registerEmailHandleText = it
             },
             label = {
                 Text("Handle or Email")
@@ -195,15 +188,15 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavCo
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            value = passwordText,
+            value = registerPasswordText,
             onValueChange = {
-                passwordText = it
+                registerPasswordText = it
             },
             label = {
                 Text("Password")
             },
             supportingText = {
-                Text("Click Forgot Password? if forgotten")
+                Text("Minimum Ten characters")
             },
             placeholder = {
                 Text("secretPassword123\$")
@@ -212,6 +205,46 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavCo
                 Icon(
                     imageVector = Icons.Filled.Lock,
                     contentDescription = "Password"
+                )
+            },
+            trailingIcon = {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        imageVector = Icons.Filled.Visibility,
+                        contentDescription = "Clear"
+                    )
+                }
+            },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Next
+            ),
+            visualTransformation = PasswordVisualTransformation()
+        )
+
+        // Repeat Password text field
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            value = repeatPasswordText,
+            onValueChange = {
+                repeatPasswordText = it
+            },
+            label = {
+                Text("Repeat Password")
+            },
+            supportingText = {
+                Text("Match new password")
+            },
+            placeholder = {
+                Text("secretPassword123\$")
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.Lock,
+                    contentDescription = "Email"
                 )
             },
             trailingIcon = {
@@ -273,29 +306,11 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavCo
                     contentDescription = "Email"
                 )
                 Text(
-                    text = "Sign in with password",
+                    text = "Sign up with Password",
                     style = MaterialTheme.typography.labelLarge,
                 )
             }
         }
-
-        // Forgot password button
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .clip(shape = CircleShape)
-                .clickable(
-                    onClick = {
-                        navController.navigate(Screen.ForgotPassScreen.route)
-                    }
-                )
-                .padding(vertical = 12.dp),
-            text = "Forgot password?",
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.primary
-        )
 
         // or continue with divider
         Row(
@@ -371,7 +386,7 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavCo
                 .clip(shape = CircleShape)
                 .clickable(
                     onClick = {
-                        navController.navigate(Screen.RegisterScreen.route)
+                        navController.navigate(Screen.LoginWithPassScreen.route)
                     }
                 )
                 .padding(all = 12.dp),
@@ -379,12 +394,12 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavCo
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
-                text = "Don't have an account?",
+                text = "Already have an account?",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.outline
             )
             Text(
-                text = "Sign up",
+                text = "Sign in",
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -403,7 +418,7 @@ fun LoginWithPassScreenContent(innerPadding: PaddingValues, navController: NavCo
 //@PreviewDynamicColors
 @PreviewLightDark
 @Composable
-fun LoginWithPassScreenPreview() {
+fun SignUpScreenPreview() {
     val navController = rememberNavController()
-    LoginWithPassPage(navController = navController)
+    SignUpScreen(navController = navController)
 }

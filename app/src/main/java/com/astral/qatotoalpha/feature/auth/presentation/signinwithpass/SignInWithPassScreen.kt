@@ -1,4 +1,4 @@
-package com.astral.qatotoalpha.feature.auth.presentation.register
+package com.astral.qatotoalpha.feature.auth.presentation.signinwithpass
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -58,6 +58,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -68,13 +69,13 @@ import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun RegisterScreen(navController: NavController) {
-    RegisterPage(navController = navController)
+fun SignInWithPassScreen(navController: NavController) {
+    SignInWithPassPage(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterPage(navController: NavController) {
+fun SignInWithPassPage(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -89,11 +90,17 @@ fun RegisterPage(navController: NavController) {
                     LargeTopAppBar(
                         title = {
                             Text(
-                                text = "Sign up"
+                                text = "Sign in with Password"
                             )
                         },
                         navigationIcon = {
-                            IconButton(onClick = { navController.popBackStack() }) {
+                            IconButton(
+                                onClick = {
+                                    if (navController.currentBackStackEntry?.destination?.route == Screen.LoginWithPassScreen.route) {
+                                        navController.popBackStack()
+                                    }
+                                }
+                            ) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                     contentDescription = "Back"
@@ -104,22 +111,22 @@ fun RegisterPage(navController: NavController) {
                     )
                 }
             ) { innerPadding ->
-                RegisterScreenContent(innerPadding = innerPadding, navController = navController)
+                SignInWithPassScreenContent(
+                    innerPadding = innerPadding,
+                    navController = navController
+                )
             }
         }
     }
 }
 
 @Composable
-fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavController) {
+fun SignInWithPassScreenContent(innerPadding: PaddingValues, navController: NavController) {
     // Handle or Email text field
-    var registerEmailHandleText by remember { mutableStateOf("") }
+    var emailHandleText by remember { mutableStateOf("") }
 
     // Password text field
-    var registerPasswordText by remember { mutableStateOf("") }
-
-    // Repeat Password text field
-    var repeatPasswordText by remember { mutableStateOf("") }
+    var passwordText by remember { mutableStateOf("") }
 
     // Remember me switch
     var checked by remember { mutableStateOf(false) }
@@ -157,9 +164,9 @@ fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavControl
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            value = registerEmailHandleText,
+            value = emailHandleText,
             onValueChange = {
-                registerEmailHandleText = it
+                emailHandleText = it
             },
             label = {
                 Text("Handle or Email")
@@ -188,15 +195,15 @@ fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavControl
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            value = registerPasswordText,
+            value = passwordText,
             onValueChange = {
-                registerPasswordText = it
+                passwordText = it
             },
             label = {
                 Text("Password")
             },
             supportingText = {
-                Text("Minimum Ten characters")
+                Text("Click Forgot Password? if forgotten")
             },
             placeholder = {
                 Text("secretPassword123\$")
@@ -205,46 +212,6 @@ fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavControl
                 Icon(
                     imageVector = Icons.Filled.Lock,
                     contentDescription = "Password"
-                )
-            },
-            trailingIcon = {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        imageVector = Icons.Filled.Visibility,
-                        contentDescription = "Clear"
-                    )
-                }
-            },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password,
-                imeAction = ImeAction.Next
-            ),
-            visualTransformation = PasswordVisualTransformation()
-        )
-
-        // Repeat Password text field
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            value = repeatPasswordText,
-            onValueChange = {
-                repeatPasswordText = it
-            },
-            label = {
-                Text("Repeat Password")
-            },
-            supportingText = {
-                Text("Match new password")
-            },
-            placeholder = {
-                Text("secretPassword123\$")
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Lock,
-                    contentDescription = "Email"
                 )
             },
             trailingIcon = {
@@ -306,11 +273,29 @@ fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavControl
                     contentDescription = "Email"
                 )
                 Text(
-                    text = "Sign up with Password",
+                    text = "Sign in with password",
                     style = MaterialTheme.typography.labelLarge,
                 )
             }
         }
+
+        // Forgot password button
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .clip(shape = CircleShape)
+                .clickable(
+                    onClick = {
+                        navController.navigate(Screen.ForgotPassScreen.route)
+                    }
+                )
+                .padding(vertical = 12.dp),
+            text = "Forgot password?",
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.primary
+        )
 
         // or continue with divider
         Row(
@@ -386,7 +371,7 @@ fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavControl
                 .clip(shape = CircleShape)
                 .clickable(
                     onClick = {
-                        navController.navigate(Screen.LoginWithPassScreen.route)
+                        navController.navigate(Screen.RegisterScreen.route)
                     }
                 )
                 .padding(all = 12.dp),
@@ -394,12 +379,12 @@ fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavControl
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
-                text = "Already have an account?",
+                text = "Don't have an account?",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.outline
             )
             Text(
-                text = "Sign in",
+                text = "Sign up",
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -418,7 +403,7 @@ fun RegisterScreenContent(innerPadding: PaddingValues, navController: NavControl
 //@PreviewDynamicColors
 @PreviewLightDark
 @Composable
-fun RegisterScreenPreview() {
+fun SignInWithPassScreenPreview() {
     val navController = rememberNavController()
-    RegisterScreen(navController = navController)
+    SignInWithPassPage(navController = navController)
 }
