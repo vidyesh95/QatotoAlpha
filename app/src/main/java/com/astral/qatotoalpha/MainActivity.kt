@@ -103,7 +103,7 @@ class MainActivity : ComponentActivity() {
                             "Signed out successfully",
                             Toast.LENGTH_LONG
                         ).show()
-                        navController.navigate(Graph.PROFILE_GRAPH)
+                        navController.navigate(Graph.ROOT_GRAPH)
                     }
                 }
             )
