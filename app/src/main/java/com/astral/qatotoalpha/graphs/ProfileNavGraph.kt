@@ -24,7 +24,10 @@ fun NavGraphBuilder.profileNavigationGraph(
         startDestination = Screen.ProfileScreen.route
     ) {
         composable(route = Screen.ProfileScreen.route) {
-            ProfileScreen(navController = navController)
+            ProfileScreen(
+                navController = navController,
+                userData = userData
+            )
         }
         composable(route = Screen.AccountSettingsScreen.route) {
             AccountSettingsScreen(

@@ -45,7 +45,9 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.feature.auth.presentation.signin.UserData
 import com.astral.qatotoalpha.feature.profile.data.ProfileScreenRepository
 import com.astral.qatotoalpha.feature.profile.domain.ProfileScreenModel
 import com.astral.qatotoalpha.graphs.Graph
@@ -53,13 +55,19 @@ import com.astral.qatotoalpha.ui.theme.QatotoAlphaTheme
 import com.astral.qatotoalpha.util.Screen
 
 @Composable
-fun ProfileScreen(navController: NavController) {
-    ProfilePage(navController = navController)
+fun ProfileScreen(
+    navController: NavController,
+    userData: UserData?
+) {
+    ProfilePage(navController = navController, userData = userData)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfilePage(navController: NavController) {
+fun ProfilePage(
+    navController: NavController,
+    userData: UserData?
+) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     QatotoAlphaTheme {
         Surface(
@@ -95,14 +103,21 @@ fun ProfilePage(navController: NavController) {
                     )
                 }
             ) { innerPadding ->
-                ProfileScreenContent(innerPadding = innerPadding, navController = navController)
+                ProfileScreenContent(
+                    innerPadding = innerPadding,
+                    navController = navController,
+                    userData = userData
+                )
             }
         }
     }
 }
 
 @Composable
-fun ProfileCard(navController: NavController) {
+fun ProfileCard(
+    navController: NavController,
+    userData: UserData?
+) {
     Card(
         onClick = {
             navController.navigate(Graph.AUTH_GRAPH)
@@ -138,20 +153,37 @@ fun ProfileCard(navController: NavController) {
                     softWrap = true,
                     overflow = TextOverflow.Ellipsis
                 )
-                Image(
-                    modifier = Modifier
-                        .size(size = 72.dp)
-                        .clip(shape = CircleShape)
-                        .border(
-                            width = 1.dp,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.2f),
-                            shape = CircleShape
-                        )
-                        .padding(all = 1.dp),
-                    painter = painterResource(id = R.drawable.avatar),
-                    contentDescription = "Avatar",
-                    contentScale = ContentScale.Crop
-                )
+                if (userData?.profilePictureUrl != null) {
+                    AsyncImage(
+                        model = userData.profilePictureUrl,
+                        contentDescription = "Avatar",
+                        modifier = Modifier
+                            .size(size = 72.dp)
+                            .clip(shape = CircleShape)
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.2f),
+                                shape = CircleShape
+                            )
+                            .padding(all = 1.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Image(
+                        modifier = Modifier
+                            .size(size = 72.dp)
+                            .clip(shape = CircleShape)
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.2f),
+                                shape = CircleShape
+                            )
+                            .padding(all = 1.dp),
+                        painter = painterResource(id = R.drawable.avatar),
+                        contentDescription = "Avatar",
+                        contentScale = ContentScale.Crop
+                    )
+                }
             }
             Row(
                 modifier = Modifier
@@ -320,7 +352,11 @@ fun ProfileItem(item: ProfileScreenModel, navController: NavController) {
 }
 
 @Composable
-fun ProfileScreenContent(innerPadding: PaddingValues, navController: NavController) {
+fun ProfileScreenContent(
+    innerPadding: PaddingValues,
+    navController: NavController,
+    userData: UserData?
+) {
     val profileScreenRepository = ProfileScreenRepository()
     val profileScreenData = profileScreenRepository.getAllData()
     LazyColumn(
@@ -336,7 +372,7 @@ fun ProfileScreenContent(innerPadding: PaddingValues, navController: NavControll
             },
             itemContent = { index, item: ProfileScreenModel ->
                 if (index == 0) {
-                    ProfileCard(navController = navController)
+                    ProfileCard(navController = navController, userData = userData)
                 }
                 ProfileItem(item = item, navController = navController)
             }
@@ -350,5 +386,10 @@ fun ProfileScreenContent(innerPadding: PaddingValues, navController: NavControll
 @Composable
 fun ProfileScreenPreview() {
     val navController = rememberNavController()
-    ProfilePage(navController = navController)
+    val userData = UserData(
+        userID = "123456",
+        username = null,
+        profilePictureUrl = null
+    )
+    ProfilePage(navController = navController, userData = userData)
 }

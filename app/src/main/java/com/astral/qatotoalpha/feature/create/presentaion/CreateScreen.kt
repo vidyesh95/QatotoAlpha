@@ -48,11 +48,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.feature.auth.presentation.signin.UserData
 import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
 
 @Composable
-fun CreateScreen(navController: NavController) {
+fun CreateScreen(navController: NavController, userData: UserData?) {
     CreatePage(navController = navController)
 }
 

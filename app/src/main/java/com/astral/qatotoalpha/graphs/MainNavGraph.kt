@@ -34,16 +34,16 @@ fun MainNavigationGraph(
         modifier = Modifier.padding(innerPadding)
     ) {
         composable(route = NavigationBarScreen.HomeScreen.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, userData = userData)
         }
         composable(route = NavigationBarScreen.AnimeScreen.route) {
-            AnimeScreen(navController = navController)
+            AnimeScreen(navController = navController, userData = userData)
         }
         composable(route = NavigationBarScreen.CreateScreen.route) {
-            CreateScreen(navController = navController)
+            CreateScreen(navController = navController, userData = userData)
         }
         composable(route = NavigationBarScreen.StoreScreen.route) {
-            StoreScreen(navController = navController)
+            StoreScreen(navController = navController, userData = userData)
         }
         composable(route = NavigationBarScreen.ShortsScreen.route) {
             ShortsScreen()

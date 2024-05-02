@@ -55,6 +55,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.astral.qatotoalpha.R
+import com.astral.qatotoalpha.feature.auth.presentation.signin.UserData
 import com.astral.qatotoalpha.feature.store.data.repository.ProductRepository
 import com.astral.qatotoalpha.feature.store.data.repository.StorePathwayRepository
 import com.astral.qatotoalpha.feature.store.data.repository.StoreScreenRepository
@@ -65,7 +66,7 @@ import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
 
 @Composable
-fun StoreScreen(navController: NavController) {
+fun StoreScreen(navController: NavController, userData: UserData?) {
     StorePage(navController = navController)
 }
 

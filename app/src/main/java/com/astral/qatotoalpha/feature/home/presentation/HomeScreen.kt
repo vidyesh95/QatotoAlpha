@@ -53,6 +53,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
+import com.astral.qatotoalpha.feature.auth.presentation.signin.UserData
 import com.astral.qatotoalpha.feature.home.data.repository.VideoRepository
 import com.astral.qatotoalpha.feature.home.domain.model.VideoModel
 import com.astral.qatotoalpha.feature.shorts.data.repository.ShortsRepository
@@ -61,13 +63,13 @@ import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
 
 @Composable
-fun HomeScreen(navController: NavController) {
-    HomePage(navController = navController)
+fun HomeScreen(navController: NavController, userData: UserData?) {
+    HomePage(navController = navController, userData = userData)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePage(navController: NavController) {
+fun HomePage(navController: NavController, userData: UserData?) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
@@ -105,12 +107,23 @@ fun HomePage(navController: NavController) {
                             //viewModel.onTintColorChanged()
                         }
                     ) {
-                        Icon(
-                            imageVector = Icons.Outlined.AccountCircle,
-                            contentDescription = "Account",
-                            //tint = viewModel.tintColor
-                            //tint = MaterialTheme.colorScheme.primary
-                        )
+                        if (userData?.profilePictureUrl != null) {
+                            AsyncImage(
+                                model = userData.profilePictureUrl,
+                                contentDescription = "Account",
+                                modifier = Modifier
+                                    .size(32.dp)
+                                    .clip(CircleShape),
+                                contentScale = ContentScale.Crop
+                            )
+                        } else {
+                            Icon(
+                                imageVector = Icons.Outlined.AccountCircle,
+                                contentDescription = "Account",
+                                //tint = viewModel.tintColor
+                                //tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
                     }
                 },
                 scrollBehavior = scrollBehavior
@@ -628,5 +641,10 @@ fun VideoContainerLive(videoModel: VideoModel) {
 @Composable
 fun HomeScreenPreview() {
     val navController = rememberNavController()
-    HomePage(navController = navController)
+    val userData = UserData(
+        userID = "123456",
+        username = null,
+        profilePictureUrl = null
+    )
+    HomePage(navController = navController, userData = userData)
 }

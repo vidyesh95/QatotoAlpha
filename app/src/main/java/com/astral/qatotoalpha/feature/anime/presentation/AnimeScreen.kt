@@ -54,11 +54,12 @@ import com.astral.qatotoalpha.feature.anime.data.repository.AnimeRepository
 import com.astral.qatotoalpha.feature.anime.data.repository.AnimeScreenRepository
 import com.astral.qatotoalpha.feature.anime.domain.model.AnimeModel
 import com.astral.qatotoalpha.feature.anime.domain.model.AnimeScreenModel
+import com.astral.qatotoalpha.feature.auth.presentation.signin.UserData
 import com.astral.qatotoalpha.graphs.Graph
 import com.astral.qatotoalpha.ui.theme.RobotoSerifFontFamily
 
 @Composable
-fun AnimeScreen(navController: NavController) {
+fun AnimeScreen(navController: NavController, userData: UserData?) {
     AnimePage(navController = navController)
 }
 
