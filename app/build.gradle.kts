@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.serialization)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.com.google.services)
     alias(libs.plugins.com.google.firebase.crashlytics)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
@@ -55,6 +57,7 @@ android {
 dependencies {
 
     implementation(libs.core.ktx)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.core.splashscreen)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
